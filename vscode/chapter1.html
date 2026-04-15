@@ -30,9 +30,11 @@ window.MathJax = {
 <title>第1章 质点运动学｜五节完整HTML课件 v30</title>
 <style>
 :root{
-  --font-latin:"Times New Roman","Times","Nimbus Roman No9 L",serif;
-  --font-cjk:"Microsoft YaHei","PingFang SC","Noto Sans SC",sans-serif;
-  --font-mix:"Times New Roman","Times","Nimbus Roman No9 L","Microsoft YaHei","PingFang SC","Noto Sans SC",sans-serif;
+  --font-ui:"Microsoft YaHei","微软雅黑","PingFang SC","Noto Sans SC","Segoe UI",sans-serif;
+  --font-math:"Times New Roman","Times","Nimbus Roman No9 L","Cambria Math",serif;
+  --font-cjk:var(--font-ui);
+  --font-latin:var(--font-math);
+  --font-mix:var(--font-ui);
   --bg:#f4f8fd;--panel:rgba(255,255,255,.88);--panel2:rgba(255,255,255,.95);--text:#15324d;--sub:#5f768e;
   --line:rgba(74,144,226,.18);--acc:#4a90e2;--acc2:#7d7aff;--shadow:0 18px 42px rgba(28,66,110,.12);
   --slide-w:min(96vw,1366px);--slide-h:min(calc(96vw * 9 / 16),768px);--title:42px;--h2:36px;--h3:22px;--body:24px;--small:15px;
@@ -816,12 +818,7 @@ p .math-display{display:block;margin:0}
   padding-left: .2em!important;
 }
 
-/* ===== 字体统一覆盖：中文正文=微软雅黑；英文/公式=Times New Roman ===== */
-:root{
-  --font-latin:"Times New Roman","Times","Nimbus Roman No9 L",serif;
-  --font-cjk:"Microsoft YaHei","微软雅黑","PingFang SC","Noto Sans SC",sans-serif;
-  --font-mix:"Microsoft YaHei","微软雅黑","PingFang SC","Noto Sans SC",sans-serif;
-}
+/* ===== 字体统一覆盖：变量在顶部 :root 定义，这里只做应用层覆盖 ===== */
 body,
 button,input,textarea,select,
 h1,h2,h3,h4,h5,p,li,ol,ul,
