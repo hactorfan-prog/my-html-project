@@ -1011,7 +1011,6 @@ mjx-container, mjx-container *,
   --heading-strong:#27547b;
   --heading-sub:#2d5f8d;
   --heading-accent:#3b6798;
-  --heading-exercise:#4165b7;
   --btn-bg: rgba(255,255,255,.90);
   --show-btn-bg: rgba(255,255,255,.92);
   --panel-float-bg: rgba(255,255,255,.94);
@@ -1041,7 +1040,10 @@ body{
 .slide-body > h3,.slide-body > .section-block > h3.same-level{color:var(--heading-accent)}
 .slide-title-wrap h2.outline-parent.continue{color:var(--heading-sub)!important}
 .qna-large .slide-title-wrap h2,.big-text-page .slide-title-wrap h2{color:var(--heading-sub)!important}
-.exercise-slide .slide-title-wrap h2{color:var(--heading-exercise)!important}
+.qna-large .slide-title-wrap h2,
+.tight-calc .slide-title-wrap h2,
+.calc-continue .slide-title-wrap h2,
+.reply-slide .slide-title-wrap h2{color:#4165b7!important}
 
 body[data-theme="navy"]{
   --bg:#eef4fb;--panel:rgba(255,255,255,.90);--panel2:rgba(255,255,255,.96);--text:#16304a;--sub:#607587;
@@ -4606,18 +4608,7 @@ function normalizeInlineTokens(root=document){
   });
 }
 
-function markExerciseSlides(root=document){
-  const exercisePattern = /(提问|问答题|计算题|作业|讨论题|思考题)/;
-  root.querySelectorAll('.slide').forEach(slide => {
-    const title = slide.querySelector('.slide-title-wrap h2');
-    if(!title) return;
-    const text = (title.textContent || '').trim();
-    if(exercisePattern.test(text)) slide.classList.add('exercise-slide');
-  });
-}
-
 document.addEventListener('DOMContentLoaded', async ()=>{
-  markExerciseSlides();
   wrapLatinRuns();
   initThemeSystem();
   initDensitySystem();
