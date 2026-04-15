@@ -3825,11 +3825,21 @@ function forceReflow(el){
   return el ? el.offsetHeight : 0;
 }
 
-function slideOverflowInPrint(slide){
-  if(!slide) return false;
+function getPrintOverflowMetrics(slide){
+  if(!slide) return { hOverflow: 0, wOverflow: 0, maxOverflow: 0 };
   const hOverflow = slide.scrollHeight - slide.clientHeight;
   const wOverflow = slide.scrollWidth - slide.clientWidth;
-  return hOverflow > 2 || wOverflow > 2;
+  const maxOverflow = Math.max(hOverflow, wOverflow);
+  return { hOverflow, wOverflow, maxOverflow };
+}
+
+function slideOverflowInPrint(slide){
+  if(!slide) return false;
+  const { wOverflow, maxOverflow } = getPrintOverflowMetrics(slide);
+  if(wOverflow > 2) return true;
+  if(maxOverflow <= 6) return false;
+  if(maxOverflow > 14) return true;
+  return pageFillRatio(slide) > 1.01;
 }
 
 function fitSingleSlideForPrint(slide){
@@ -3928,6 +3938,10 @@ function enforceStrictPagination(forceFull=false){
     for(const slide of currentSlides){
       if(slide.classList.contains('hidden-slide')) continue;
       forceReflow(slide);
+      if(slideOverflowInPrint(slide)){
+        fitSingleSlideForPrint(slide);
+        forceReflow(slide);
+      }
       if(slideOverflowInPrint(slide)){
         splitSlideStrict(slide, slideOverflowInPrint);
         changed = true;
