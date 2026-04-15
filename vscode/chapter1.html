@@ -1554,7 +1554,18 @@ body[data-shadow-mode="off"] .export-status{
 #s129.extra-tight .merge-block.answer-box{padding:0.38em 0.52em;}
 #s129.extra-tight .formula-line{margin:0.10em 0;}
 #s129.extra-tight p,#s129.extra-tight li{margin:0.08em 0;}
-span.math-inline.inline-small{font-size:.8em!important;}
+/* v44: 单字符数学变量与正文等高，避免出现“忽大忽小”的观感 */
+.slide .math-inline.inline-small,
+.slide .math-inline.inline-var,
+.slide .latin-run.small,
+.slide .var-inline.small,
+span.math-inline.inline-small{
+  font-size:1em!important;
+}
+.slide .math-inline.inline-small mjx-container[jax="SVG"],
+.slide .math-inline.inline-var mjx-container[jax="SVG"]{
+  vertical-align:-0.08em!important;
+}
 </style>
 <style id="pdf-print-fix-v1">
 /* PDF print fix: formula-heavy pages tend to grow in print preview, so we
