@@ -3846,14 +3846,27 @@ function buildContinuationSlide(source, seq){
   return clone;
 }
 
+const MAX_CALC_CONTINUATIONS = 5;
+
+function getContinuationLimit(slide){
+  const semanticType = slide?.dataset?.layoutType || detectSlideSemanticType(slide);
+  if(semanticType === 'calc') return MAX_CALC_CONTINUATIONS;
+  return Number.POSITIVE_INFINITY;
+}
+
 function splitSlideWithOverflowTester(slide, overflowTester){
   let current = slide;
   let seq = 1;
+  const continuationLimit = getContinuationLimit(slide);
   cacheBaseLayout(current);
   tightenToFit(current);
   forceReflow(current);
 
   while(overflowTester(current)){
+    if(seq > continuationLimit){
+      current.classList.add('auto-overflow-warning');
+      break;
+    }
     if(!isSplittable(current)){
       current.classList.add('auto-overflow-warning');
       break;
