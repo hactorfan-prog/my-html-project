@@ -81,11 +81,7 @@ mjx-container{color:inherit!important} .math-display mjx-container{display:inlin
 @page{size:13.333in 7.5in; margin:0}
 @media print{body{background:white} .topbar,.toc,.progress-wrap,.show-topbar-btn{display:none!important} main{padding:0} .deck{gap:0} .slide{width:13.333in;min-height:7.5in;height:7.5in;border-radius:0;box-shadow:none;page-break-after:always;padding:0.32in 0.40in 0.26in 0.50in;overflow:hidden} .slide:last-child{page-break-after:auto} body.print-current .deck{display:block!important} body.print-current .slide{display:none!important} body.print-current .slide.print-target{display:flex!important;page-break-after:auto!important}}
 
-.merge-block{margin-top:8px;padding:14px 16px;border-radius:18px;background:rgba(74,144,226,.06);border:1px solid rgba(74,144,226,.12)}
-.merge-block h3,.merge-block h4{margin:0 0 6px 0}
-.slide.compact p,.slide.compact li{font-size:22px;line-height:1.44}
-.slide.compact h3{font-size:20px}
-.slide.compact .meta-card,.slide.compact .quote-box{font-size:20px}
+/* keep one compact merge-block baseline; older duplicated block removed */
 .slide-body > * + *{margin-top:2px}
 
 .section-block > h3,.merge-block > h3{
@@ -250,24 +246,6 @@ p .math-display{display:block;margin:0}
   letter-spacing: 0;
   word-spacing: 0;
 }
-.big-text-page .slide-body{
-  margin: auto 0;
-  gap: 14px;
-}
-.big-text-page p,.big-text-page li{
-  font-size: 28px !important;
-  line-height: 1.72 !important;
-}
-.big-text-page h2{
-  font-size: 36px !important;
-}
-.big-text-page h3{
-  font-size: 24px !important;
-  line-height: 1.32 !important;
-}
-.big-text-page .merge-block,.big-text-page .section-block,.big-text-page .panel,.big-text-page .callout{
-  padding: 18px 20px !important;
-}
 .mid-big-page p,.mid-big-page li{
   font-size: 22px !important;
   line-height: 1.5 !important;
@@ -279,8 +257,8 @@ p .math-display{display:block;margin:0}
 /* v17 refinements */
 .formula-line{display:flex;align-items:baseline;gap:8px;flex-wrap:wrap}
 .formula-line>.label{flex:0 0 auto}
-.formula-line>.math-display,.formula-line>.math-display{display:inline-block;margin:0;padding:0}
-.formula-line>.math-display mjx-container,.formula-line>.math-display mjx-container{display:inline-block!important;vertical-align:middle!important}
+.formula-line>.math-display{display:inline-block;margin:0;padding:0}
+.formula-line>.math-display mjx-container{display:inline-block!important;vertical-align:middle!important}
 .formula-line+.formula-line{margin-top:2px}
 .calc-continue .formula-line,.tight .formula-line,.tight-calc .formula-line{gap:6px}
 .calc-continue .formula-line>.label,.tight .formula-line>.label,.tight-calc .formula-line>.label{font-size:inherit;line-height:inherit}
@@ -361,8 +339,8 @@ p .math-display{display:block;margin:0}
 /* formula presentation */
 .formula-line{display:grid!important;grid-template-columns:1fr!important;align-items:start!important;gap:4px!important}
 .formula-line>.label{display:block!important;width:100%!important}
-.formula-line>.math-display,.formula-line>.math-display{display:block!important;width:100%!important;margin:0!important;padding:0!important;text-align:center!important}
-.formula-line>.math-display mjx-container,.formula-line>.math-display mjx-container{display:inline-block!important;vertical-align:middle!important}
+.formula-line>.math-display{display:block!important;width:100%!important;margin:0!important;padding:0!important;text-align:center!important}
+.formula-line>.math-display mjx-container{display:inline-block!important;vertical-align:middle!important}
 .lead-to-formula{margin-bottom:0!important}
 .formula-paragraph{display:grid!important;justify-items:center!important;align-items:start!important;margin-top:2px!important}
 .formula-paragraph>.math-display{display:block!important;width:100%!important;text-align:center!important;margin:2px 0 0!important}
@@ -500,7 +478,7 @@ p .math-display{display:block;margin:0}
 .math-display{margin:0!important;padding:0!important;text-align:center!important}
 .formula-line{gap:3px!important}
 .formula-line>.label{display:block!important;width:100%!important}
-.formula-line>.math-display,.formula-line>.math-display{display:block!important;width:100%!important;text-align:center!important}
+.formula-line>.math-display{display:block!important;width:100%!important;text-align:center!important}
 .slide.summary-slide,.slide.board-slide{gap:8px!important}
 .slide.summary-slide .slide-title-wrap h2,.slide.board-slide .slide-title-wrap h2{font-size:32px!important}
 .slide.summary-slide .slide-body,.slide.board-slide .slide-body{gap:3px!important;padding-left:4px!important}
