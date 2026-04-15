@@ -3738,6 +3738,12 @@ function pageFillRatio(slide){
   return getBodyContentHeight(slide) / capacity;
 }
 
+const PAGE_SPLIT_FILL_THRESHOLD = 0.9;
+
+function reachedSplitThreshold(slide){
+  return pageFillRatio(slide) >= PAGE_SPLIT_FILL_THRESHOLD;
+}
+
 function isOverflowing(slide){
   return pageFillRatio(slide) > 1.0005;
 }
@@ -3902,7 +3908,7 @@ function splitSlideWithOverflowTester(slide, overflowTester){
 }
 
 function splitSlideSmart(slide){
-  splitSlideWithOverflowTester(slide, isOverflowing);
+  splitSlideWithOverflowTester(slide, reachedSplitThreshold);
 }
 
 function splitSlideStrict(slide, overflowTester = slideOverflowInPrint){
