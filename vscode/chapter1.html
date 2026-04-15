@@ -3825,11 +3825,21 @@ function forceReflow(el){
   return el ? el.offsetHeight : 0;
 }
 
-function slideOverflowInPrint(slide){
-  if(!slide) return false;
+function getPrintOverflowMetrics(slide){
+  if(!slide) return { hOverflow: 0, wOverflow: 0, maxOverflow: 0 };
   const hOverflow = slide.scrollHeight - slide.clientHeight;
   const wOverflow = slide.scrollWidth - slide.clientWidth;
-  return hOverflow > 2 || wOverflow > 2;
+  const maxOverflow = Math.max(hOverflow, wOverflow);
+  return { hOverflow, wOverflow, maxOverflow };
+}
+
+function slideOverflowInPrint(slide){
+  if(!slide) return false;
+  const { wOverflow, maxOverflow } = getPrintOverflowMetrics(slide);
+  if(wOverflow > 2) return true;
+  if(maxOverflow <= 6) return false;
+  if(maxOverflow > 14) return true;
+  return pageFillRatio(slide) > 1.01;
 }
 
 function fitSingleSlideForPrint(slide){
@@ -3929,6 +3939,10 @@ function enforceStrictPagination(forceFull=false){
       if(slide.classList.contains('hidden-slide')) continue;
       forceReflow(slide);
       if(slideOverflowInPrint(slide)){
+        fitSingleSlideForPrint(slide);
+        forceReflow(slide);
+      }
+      if(slideOverflowInPrint(slide)){
         splitSlideStrict(slide, slideOverflowInPrint);
         changed = true;
         refreshSlides();
@@ -3996,6 +4010,11 @@ function buildPrintableHtml(slidesToPrint, docTitle){
   <title>${docTitle || document.title}</title>
   <style>${styleText}</style>
   <style>
+    @page{size:13.333in 7.5in; margin:0}
+    html,body{
+      -webkit-print-color-adjust:exact!important;
+      print-color-adjust:exact!important;
+    }
     body{background:#fff!important}
     .topbar,.toc,.progress-wrap,.show-topbar-btn,.export-status,.theme-panel,.density-panel,.date-panel{display:none!important}
     main{padding:0!important}
@@ -4022,7 +4041,17 @@ function openPrintWindow(slidesToPrint, docTitle){
   printWindow.document.open();
   printWindow.document.write(buildPrintableHtml(slidesToPrint, docTitle));
   printWindow.document.close();
-  const triggerPrint = () => {
+  const triggerPrint = async () => {
+    try{
+      if(printWindow.document.fonts?.ready){
+        await printWindow.document.fonts.ready;
+      }
+    }catch(_err){}
+    const settleFrames = /Chrome/.test(navigator.userAgent) && !/Edg\//.test(navigator.userAgent) ? 6 : 3;
+    for(let i=0; i<settleFrames; i++){
+      await new Promise(resolve => printWindow.requestAnimationFrame(() => resolve()));
+    }
+    await new Promise(resolve => setTimeout(resolve, settleFrames >= 6 ? 360 : 160));
     printWindow.focus();
     printWindow.print();
     window.setTimeout(() => printWindow.close(), 300);
