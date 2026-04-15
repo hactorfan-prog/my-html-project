@@ -457,9 +457,9 @@ p .math-display{display:block;margin:0}
 }
 
 /* v30: continue refining on the old base */
-:root{--h2:32px;--h3:22px;--body:22px}
-.slide-title-wrap h2{font-size:32px!important;line-height:1.18!important;letter-spacing:0!important}
-.cover .slide-title-wrap h2,.section-cover .slide-title-wrap h2{font-size:32px!important;line-height:1.18!important}
+:root{--h2:30px;--h3:22px;--body:22px}
+.slide-title-wrap h2{font-size:30px!important;line-height:1.18!important;letter-spacing:0!important;color:var(--heading-title)!important}
+.cover .slide-title-wrap h2,.section-cover .slide-title-wrap h2{font-size:31px!important;line-height:1.18!important}
 .slide p,.slide li,.slide .label{font-size:22px!important;line-height:1.50!important}
 .slide h3{font-size:22px!important;line-height:1.28!important}
 .slide.compact p,.slide.compact li,.slide.compact .label,
@@ -477,7 +477,7 @@ p .math-display{display:block;margin:0}
 .formula-line>.label{display:block!important;width:100%!important}
 .formula-line>.math-display{display:block!important;width:100%!important;text-align:center!important}
 .slide.summary-slide,.slide.board-slide{gap:8px!important}
-.slide.summary-slide .slide-title-wrap h2,.slide.board-slide .slide-title-wrap h2{font-size:32px!important}
+.slide.summary-slide .slide-title-wrap h2,.slide.board-slide .slide-title-wrap h2{font-size:30px!important}
 .slide.summary-slide .slide-body,.slide.board-slide .slide-body{gap:3px!important;padding-left:4px!important}
 .slide.summary-slide .summary-formula,.slide.board-slide .board-item,.slide.board-slide .board-subformula{gap:1px!important}
 .slide.board-slide .board-head{font-size:20px!important;line-height:1.26!important;font-weight:700;color:#234462;margin:0!important}
@@ -486,7 +486,7 @@ p .math-display{display:block;margin:0}
 .slide.board-slide .board-note.center{line-height:1.30!important}
 
 /* Page 87 and page 147: tighten and clean to a single-page board layout */
-.page-board-layout .slide-title-wrap h2{font-size:32px!important}
+.page-board-layout .slide-title-wrap h2{font-size:30px!important}
 .page-board-layout .slide-body{gap:2px!important}
 .page-board-layout .board-item{margin-top:1px!important}
 .page-board-layout .board-item.short .board-inline{gap:8px!important;max-width:100%!important}
@@ -1007,8 +1007,10 @@ mjx-container, mjx-container *,
   --merge-bg: rgba(74,144,226,.05);
   --merge-border: rgba(74,144,226,.10);
   --toc-hover-bg: rgba(74,144,226,.12);
+  --heading-title:#1f4468;
   --heading-strong:#27547b;
   --heading-sub:#2d5f8d;
+  --heading-accent:#3b6798;
   --btn-bg: rgba(255,255,255,.90);
   --show-btn-bg: rgba(255,255,255,.92);
   --panel-float-bg: rgba(255,255,255,.94);
@@ -1035,6 +1037,9 @@ body{
 .merge-block{background:var(--merge-bg);border-color:var(--merge-border)}
 .section-block > h3,.merge-block > h3,.section-block > h3.same-level,.merge-block > h3.same-level,h4{color:var(--heading-strong)}
 .section-block > h3.subitem,.merge-block > h3.subitem,h5{color:var(--heading-sub)}
+.slide-body > h3,.slide-body > .section-block > h3.same-level{color:var(--heading-accent)}
+.slide-title-wrap h2.outline-parent.continue{color:var(--heading-sub)!important}
+.qna-large .slide-title-wrap h2,.big-text-page .slide-title-wrap h2{color:var(--heading-sub)!important}
 
 body[data-theme="navy"]{
   --bg:#eef4fb;--panel:rgba(255,255,255,.90);--panel2:rgba(255,255,255,.96);--text:#16304a;--sub:#607587;
