@@ -1400,7 +1400,7 @@ body[data-density="print"] .quote-box,body[data-density="print"] .meta-card{font
   .theme-panel{top:66px;right:14px;width:min(92vw,300px)}
   .density-panel{top:calc(66px + 320px);right:14px;width:min(92vw,300px)}
 }
-@media print{.theme-panel,.density-panel,.date-panel,#themeToggleBtn,#densityToggleBtn,#dateToggleBtn{display:none!important}}
+@media print{.theme-panel,.density-panel,.date-panel,#themeToggleBtn,#densityToggleBtn,#paginationToggleBtn,#dateToggleBtn{display:none!important}}
 
 
 /* ===== v32 模板标准收口：阴影可调 + 字体/间距统一 ===== */
@@ -1542,7 +1542,7 @@ body[data-shadow-mode="off"] .export-status{
   .shadow-panel{right:22px;top:236px}
 }
 @media print{
-  .theme-panel,.density-panel,.shadow-panel,.date-panel,#themeToggleBtn,#densityToggleBtn,#shadowToggleBtn,#dateToggleBtn{display:none!important}
+  .theme-panel,.density-panel,.shadow-panel,.date-panel,#themeToggleBtn,#densityToggleBtn,#paginationToggleBtn,#shadowToggleBtn,#dateToggleBtn{display:none!important}
 }
 
 </style>
@@ -1800,7 +1800,7 @@ body.print-measure .slide.print-fit-4{
 </head>
 <body>
 <div class="progress-wrap"><div class="progress" id="progress"></div></div>
-<header class="topbar"><div class="brand"><div class="brand-badge">📘</div><div class="brand-text"><strong>第1章 质点运动学｜五节完整课件 v31</strong><span>模板标准收口 + 严格分页 + 阴影强度/日期可调</span></div></div><div class="toolbar"><a class="btn" href="#s1">章节首页</a><a class="btn" href="#s2">第一节</a><a class="btn" href="#s46">第二节</a><a class="btn" href="#s81">第三节</a><a class="btn" href="#s147">第四节</a><a class="btn" href="#s208">第五节</a><button class="btn" id="prevBtn">上一页</button><button class="btn" id="nextBtn">下一页</button><button class="btn" id="printCurrentBtn" type="button">另存当前页PDF</button><button class="btn" id="printAllBtn" type="button">另存全部PDF</button><button class="btn" id="exportPptBtn" type="button">另存为PPT</button><button class="btn" id="themeToggleBtn" type="button">场景：日常授课</button><button class="btn" id="densityToggleBtn" type="button">版式：标准</button><button class="btn" id="shadowToggleBtn" type="button">阴影：中</button><button class="btn" id="dateToggleBtn" type="button">日期：2026年3月24日</button><button class="btn primary" id="fsBtn">全屏</button><button class="btn topbar-toggle" id="toggleTopbarBtn" type="button">隐藏快捷栏</button></div></header><button class="show-topbar-btn" id="showTopbarBtn" type="button">显示快捷栏</button>
+<header class="topbar"><div class="brand"><div class="brand-badge">📘</div><div class="brand-text"><strong>第1章 质点运动学｜五节完整课件 v31</strong><span>模板标准收口 + 严格分页 + 阴影强度/日期可调</span></div></div><div class="toolbar"><a class="btn" href="#s1">章节首页</a><a class="btn" href="#s2">第一节</a><a class="btn" href="#s46">第二节</a><a class="btn" href="#s81">第三节</a><a class="btn" href="#s147">第四节</a><a class="btn" href="#s208">第五节</a><button class="btn" id="prevBtn">上一页</button><button class="btn" id="nextBtn">下一页</button><button class="btn" id="printCurrentBtn" type="button">另存当前页PDF</button><button class="btn" id="printAllBtn" type="button">另存全部PDF</button><button class="btn" id="exportPptBtn" type="button">另存为PPT</button><button class="btn" id="themeToggleBtn" type="button">场景：日常授课</button><button class="btn" id="densityToggleBtn" type="button">版式：标准</button><button class="btn" id="paginationToggleBtn" type="button">分页：严格打印</button><button class="btn" id="shadowToggleBtn" type="button">阴影：中</button><button class="btn" id="dateToggleBtn" type="button">日期：2026年3月24日</button><button class="btn primary" id="fsBtn">全屏</button><button class="btn topbar-toggle" id="toggleTopbarBtn" type="button">隐藏快捷栏</button></div></header><button class="show-topbar-btn" id="showTopbarBtn" type="button">显示快捷栏</button>
 <div class="theme-panel" id="themePanel" hidden>
   <div class="theme-panel-title">课件显示场景</div>
   <div class="theme-panel-sub">不再按颜色命名，而是按使用场景选择。切换后会立即全局生效，并会记住你上次的选择。</div>
@@ -1822,6 +1822,15 @@ body.print-measure .slide.print-fit-4{
     <button class="density-chip" data-density="standard" type="button"><i class="density-bars"></i><span><strong>标准平衡</strong><span>最通用，适合大多数页面</span></span></button>
     <button class="density-chip" data-density="compact" type="button"><i class="density-bars"></i><span><strong>紧凑推导</strong><span>更适合公式偏多、内容偏满的页面</span></span></button>
     <button class="density-chip" data-density="print" type="button"><i class="density-bars"></i><span><strong>导出优先</strong><span>更克制，适合打印前检查与 PDF 导出</span></span></button>
+  </div>
+</div>
+<div class="density-panel" id="paginationPanel" hidden>
+  <div class="theme-panel-title">自动分页模式</div>
+  <div class="theme-panel-sub">切换分页策略：严格打印保证导出安全，平衡课堂兼顾观感，极速预览优先操作速度。</div>
+  <div class="density-grid" id="paginationGrid">
+    <button class="density-chip pagination-chip" data-pagination="strict" type="button"><i class="density-bars"></i><span><strong>严格打印</strong><span>逐页检测并二次拆分，适合最终 PDF 导出</span></span></button>
+    <button class="density-chip pagination-chip" data-pagination="balanced" type="button"><i class="density-bars"></i><span><strong>平衡课堂</strong><span>自动拆分页并回流，兼顾页面完整和阅读节奏</span></span></button>
+    <button class="density-chip pagination-chip" data-pagination="fast" type="button"><i class="density-bars"></i><span><strong>极速预览</strong><span>只做基础拆分，内容较多时速度更快</span></span></button>
   </div>
 </div>
 <div class="shadow-panel" id="shadowPanel" hidden>
@@ -3707,28 +3716,32 @@ function buildContinuationSlide(source, seq){
   return clone;
 }
 
-function splitSlideSmart(slide){
+function splitSlideWithOverflowTester(slide, overflowTester){
   let current = slide;
   let seq = 1;
   cacheBaseLayout(current);
   tightenToFit(current);
+  forceReflow(current);
 
-  while(isOverflowing(current)){
+  while(overflowTester(current)){
     if(!isSplittable(current)){
       current.classList.add('auto-overflow-warning');
       break;
     }
 
-    const body=current.querySelector('.slide-body');
-    const continuation=buildContinuationSlide(current, seq);
-    const continuationBody=continuation.querySelector('.slide-body');
-    let movedAny=false;
+    const body = current.querySelector('.slide-body');
+    const continuation = buildContinuationSlide(current, seq);
+    const continuationBody = continuation.querySelector('.slide-body');
+    let movedAny = false;
 
-    while(isOverflowing(current) && body.children.length > 1){
-      const last=body.lastElementChild;
+    while(overflowTester(current) && body.children.length > 1){
+      const last = body.lastElementChild;
       continuationBody.prepend(last);
-      movedAny=true;
+      movedAny = true;
       tightenToFit(current);
+      tightenToFit(continuation);
+      forceReflow(current);
+      forceReflow(continuation);
     }
 
     if(!movedAny){
@@ -3737,10 +3750,19 @@ function splitSlideSmart(slide){
     }
 
     current.after(continuation);
-    tightenToFit(continuation);
     current = continuation;
     seq += 1;
+    tightenToFit(current);
+    forceReflow(current);
   }
+}
+
+function splitSlideSmart(slide){
+  splitSlideWithOverflowTester(slide, isOverflowing);
+}
+
+function splitSlideStrict(slide, overflowTester = slideOverflowInPrint){
+  splitSlideWithOverflowTester(slide, overflowTester);
 }
 
 function pullFromNext(current, next){
@@ -3848,7 +3870,7 @@ async function initDeck(){
   await waitForMathJax();
   normalizeFormulaPresentation();
   normalizeInlineTokens();
-  enforceStrictPagination();
+  enforcePagination(currentPaginationMode);
   deckInitialized = true;
 }
 
@@ -3856,7 +3878,7 @@ function rerunLayout(){
   detectLargeDeckMode();
   normalizeFormulaPresentation();
   normalizeInlineTokens();
-  enforceStrictPagination();
+  enforcePagination(currentPaginationMode);
 }
 
 function getCurrentSlide(){
@@ -3931,48 +3953,7 @@ function fitSingleSlideForPrint(slide){
 }
 
 
-function splitSlideStrict(slide, overflowTester){
-  let current = slide;
-  let seq = 1;
-  cacheBaseLayout(current);
-  tightenToFit(current);
-  forceReflow(current);
-
-  while(overflowTester(current)){
-    if(!isSplittable(current)){
-      current.classList.add('auto-overflow-warning');
-      break;
-    }
-
-    const body = current.querySelector('.slide-body');
-    const continuation = buildContinuationSlide(current, seq);
-    const continuationBody = continuation.querySelector('.slide-body');
-    let movedAny = false;
-
-    while(overflowTester(current) && body.children.length > 1){
-      const last = body.lastElementChild;
-      continuationBody.prepend(last);
-      movedAny = true;
-      tightenToFit(current);
-      tightenToFit(continuation);
-      forceReflow(current);
-      forceReflow(continuation);
-    }
-
-    if(!movedAny){
-      current.classList.add('auto-overflow-warning');
-      break;
-    }
-
-    current.after(continuation);
-    current = continuation;
-    seq += 1;
-    tightenToFit(current);
-    forceReflow(current);
-  }
-}
-
-function enforceStrictPagination(forceFull=false){
+function resetPaginationArtifacts(){
   document.querySelectorAll('.auto-generated').forEach(s => s.remove());
   document.querySelectorAll('.auto-overflow-warning').forEach(s => s.classList.remove('auto-overflow-warning'));
   document.querySelectorAll('.slide').forEach(slide => {
@@ -3983,19 +3964,9 @@ function enforceStrictPagination(forceFull=false){
     PRINT_FIT_CLASSES.forEach(cls => slide.classList.remove(cls));
     slide.removeAttribute('data-print-overflow');
   });
+}
 
-  if(largeDeckMode && !forceFull){
-    refreshSlides();
-    updateUI();
-    return;
-  }
-
-  document.body.classList.add('print-measure');
-  forceReflow(document.body);
-
-  autoLayoutDeck();
-  refreshSlides();
-
+function runStrictPaginationPass(){
   let pass = 0;
   let changed = false;
   do{
@@ -4016,14 +3987,49 @@ function enforceStrictPagination(forceFull=false){
     }
     pass += 1;
   }while(changed && pass < 8);
+}
 
-  rebalanceAutoPages();
+function runBalancedPaginationPass(){
+  autoLayoutDeck();
+}
+
+function runFastPaginationPass(){
+  refreshSlides();
+  const originals = [...slides].filter(slide => !slide.classList.contains('auto-generated'));
+  originals.forEach(slide => {
+    cacheBaseLayout(slide);
+    tightenToFit(slide);
+    if(isOverflowing(slide)) splitSlideSmart(slide);
+  });
+  refreshSlides();
+}
+
+function markPaginationWarnings(){
   refreshSlides();
   document.querySelectorAll('.slide').forEach(slide => {
     forceReflow(slide);
     if(slideOverflowInPrint(slide)) slide.classList.add('auto-overflow-warning');
   });
+}
 
+function enforcePagination(mode='strict', forceFull=false){
+  resetPaginationArtifacts();
+
+  if(largeDeckMode && !forceFull){
+    refreshSlides();
+    updateUI();
+    return;
+  }
+
+  document.body.classList.add('print-measure');
+  forceReflow(document.body);
+
+  if(mode === 'fast') runFastPaginationPass();
+  else if(mode === 'balanced') runBalancedPaginationPass();
+  else runStrictPaginationPass();
+
+  rebalanceAutoPages();
+  markPaginationWarnings();
   document.body.classList.remove('print-measure');
   clearPrintPreparation();
   refreshSlides();
@@ -4083,7 +4089,7 @@ function buildPrintableHtml(slidesToPrint, docTitle){
       print-color-adjust:exact!important;
     }
     body{background:#fff!important}
-    .topbar,.toc,.progress-wrap,.show-topbar-btn,.export-status,.theme-panel,.density-panel,.date-panel{display:none!important}
+    .topbar,.toc,.progress-wrap,.show-topbar-btn,.export-status,.theme-panel,.density-panel,.date-panel,#paginationPanel{display:none!important}
     main{padding:0!important}
     .deck{gap:0!important}
     .slide{box-shadow:none!important}
@@ -4433,14 +4439,17 @@ async function exportSlidesToPpt(){
 const THEME_STORAGE_KEY = 'htmlppt.theme.chapter1';
 const DENSITY_STORAGE_KEY = 'htmlppt.density.chapter1';
 const SHADOW_STORAGE_KEY = 'htmlppt.shadow.chapter1';
+const PAGINATION_STORAGE_KEY = 'htmlppt.pagination.chapter1';
 const DATE_STORAGE_KEY = 'htmlppt.footerDate.chapter1';
 const DEFAULT_FOOTER_DATE = '2026年3月24日';
 const themeToggleBtn = document.getElementById('themeToggleBtn');
 const densityToggleBtn = document.getElementById('densityToggleBtn');
+const paginationToggleBtn = document.getElementById('paginationToggleBtn');
 const shadowToggleBtn = document.getElementById('shadowToggleBtn');
 const dateToggleBtn = document.getElementById('dateToggleBtn');
 const themePanel = document.getElementById('themePanel');
 const densityPanel = document.getElementById('densityPanel');
+const paginationPanel = document.getElementById('paginationPanel');
 const shadowPanel = document.getElementById('shadowPanel');
 const datePanel = document.getElementById('datePanel');
 const shadowRange = document.getElementById('shadowRange');
@@ -4450,6 +4459,7 @@ const dateTodayBtn = document.getElementById('dateTodayBtn');
 const dateResetBtn = document.getElementById('dateResetBtn');
 const themeChips = [...document.querySelectorAll('.theme-chip')];
 const densityChips = [...document.querySelectorAll('.density-chip')];
+const paginationChips = [...document.querySelectorAll('.pagination-chip')];
 const shadowChips = [...document.querySelectorAll('.shadow-chip')];
 const themeMeta = {
   default: { label: '日常授课' },
@@ -4466,6 +4476,12 @@ const densityMeta = {
   compact: { label: '紧凑' },
   print: { label: '导出' }
 };
+const paginationMeta = {
+  strict: { label: '严格打印' },
+  balanced: { label: '平衡课堂' },
+  fast: { label: '极速预览' }
+};
+let currentPaginationMode = 'strict';
 
 function clampShadow(value){
   const n = Number(value);
@@ -4508,6 +4524,22 @@ function setDensityButtonLabel(densityName){
   if(!densityToggleBtn) return;
   const meta = densityMeta[densityName] || densityMeta.standard;
   densityToggleBtn.textContent = `版式：${meta.label}`;
+}
+function setPaginationButtonLabel(modeName){
+  if(!paginationToggleBtn) return;
+  const meta = paginationMeta[modeName] || paginationMeta.strict;
+  paginationToggleBtn.textContent = `分页：${meta.label}`;
+}
+function applyPaginationMode(modeName, save=true){
+  const nextMode = paginationMeta[modeName] ? modeName : 'strict';
+  currentPaginationMode = nextMode;
+  document.body.setAttribute('data-pagination-mode', nextMode);
+  paginationChips.forEach(btn => btn.classList.toggle('active', btn.dataset.pagination === nextMode));
+  setPaginationButtonLabel(nextMode);
+  if(save){
+    try{ localStorage.setItem(PAGINATION_STORAGE_KEY, nextMode); }catch(e){}
+  }
+  scheduleRerunLayout();
 }
 
 function applyTheme(themeName, save=true){
@@ -4635,6 +4667,7 @@ function initFooterDateSystem(){
 function closeStylePanels(except){
   if(except !== 'theme') themePanel?.setAttribute('hidden','hidden');
   if(except !== 'density') densityPanel?.setAttribute('hidden','hidden');
+  if(except !== 'pagination') paginationPanel?.setAttribute('hidden','hidden');
   if(except !== 'shadow') shadowPanel?.setAttribute('hidden','hidden');
   if(except !== 'date') datePanel?.setAttribute('hidden','hidden');
 }
@@ -4653,6 +4686,14 @@ function toggleDensityPanel(force){
     closeStylePanels('density');
     densityPanel.removeAttribute('hidden');
   }else densityPanel.setAttribute('hidden','hidden');
+}
+function togglePaginationPanel(force){
+  if(!paginationPanel) return;
+  const shouldShow = typeof force === 'boolean' ? force : paginationPanel.hasAttribute('hidden');
+  if(shouldShow){
+    closeStylePanels('pagination');
+    paginationPanel.removeAttribute('hidden');
+  }else paginationPanel.setAttribute('hidden','hidden');
 }
 function toggleShadowPanel(force){
   if(!shadowPanel) return;
@@ -4699,6 +4740,24 @@ function initDensitySystem(){
   }));
 }
 
+function initPaginationSystem(){
+  let saved = 'strict';
+  try{ saved = localStorage.getItem(PAGINATION_STORAGE_KEY) || 'strict'; }catch(e){}
+  applyPaginationMode(saved, false);
+
+  paginationToggleBtn?.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    togglePaginationPanel();
+  });
+
+  paginationChips.forEach(btn => btn.addEventListener('click', (e)=>{
+    const nextMode = btn.dataset.pagination || 'strict';
+    applyPaginationMode(nextMode, true);
+    togglePaginationPanel(false);
+    e.stopPropagation();
+  }));
+}
+
 function initShadowSystem(){
   let saved = '0.72';
   try{ saved = localStorage.getItem(SHADOW_STORAGE_KEY) || '0.72'; }catch(e){}
@@ -4722,14 +4781,16 @@ function initShadowSystem(){
 document.addEventListener('click', (e)=>{
   const clickInTheme = !!(themePanel && !themePanel.hasAttribute('hidden') && themePanel.contains(e.target));
   const clickInDensity = !!(densityPanel && !densityPanel.hasAttribute('hidden') && densityPanel.contains(e.target));
+  const clickInPagination = !!(paginationPanel && !paginationPanel.hasAttribute('hidden') && paginationPanel.contains(e.target));
   const clickInShadow = !!(shadowPanel && !shadowPanel.hasAttribute('hidden') && shadowPanel.contains(e.target));
   const clickInDate = !!(datePanel && !datePanel.hasAttribute('hidden') && datePanel.contains(e.target));
   const clickThemeBtn = !!themeToggleBtn?.contains(e.target);
   const clickDensityBtn = !!densityToggleBtn?.contains(e.target);
+  const clickPaginationBtn = !!paginationToggleBtn?.contains(e.target);
   const clickShadowBtn = !!shadowToggleBtn?.contains(e.target);
   const clickDateBtn = !!dateToggleBtn?.contains(e.target);
   const clickFooterDate = !!(e.target && e.target.classList && e.target.classList.contains('footer-date'));
-  if(clickInTheme || clickInDensity || clickInShadow || clickInDate || clickThemeBtn || clickDensityBtn || clickShadowBtn || clickDateBtn || clickFooterDate) return;
+  if(clickInTheme || clickInDensity || clickInPagination || clickInShadow || clickInDate || clickThemeBtn || clickDensityBtn || clickPaginationBtn || clickShadowBtn || clickDateBtn || clickFooterDate) return;
   closeStylePanels();
 });
 
@@ -4770,6 +4831,12 @@ document.addEventListener('keydown',(e)=>{
   if(e.key==='Home'){e.preventDefault();goToSlide(0);}
   if(e.key==='End'){e.preventDefault();goToSlide(slides.length-1);}
   if(e.key==='h'||e.key==='H'){e.preventDefault();closeStylePanels();setTopbarHidden(!document.body.classList.contains('topbar-hidden'));}
+  if(e.key==='m'||e.key==='M'){
+    e.preventDefault();
+    const order = ['strict','balanced','fast'];
+    const next = order[(order.indexOf(currentPaginationMode) + 1) % order.length];
+    applyPaginationMode(next, true);
+  }
   if(e.key==='r'||e.key==='R'){e.preventDefault();rerunLayout();}
 });
 
@@ -4841,6 +4908,7 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   });
   initThemeSystem();
   initDensitySystem();
+  initPaginationSystem();
   initShadowSystem();
 initFooterDateSystem();
   await waitForMathJax();
