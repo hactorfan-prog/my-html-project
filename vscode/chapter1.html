@@ -3,14 +3,28 @@
 <html lang="zh-CN">
 <head><script>
 window.MathJax = {
+  loader: {
+    load: ['[tex]/physics', '[tex]/mhchem']
+  },
   tex: {
     inlineMath: [['$', '$'], ['\\(', '\\)']],
-    displayMath: [['$$', '$$'], ['\\[', '\\]']]
+    displayMath: [['$$', '$$'], ['\\[', '\\]']],
+    processEscapes: true,
+    processEnvironments: true,
+    tags: 'ams',
+    packages: {
+      '[+]': ['physics', 'mhchem']
+    }
   },
-  svg: { fontCache: 'global' }
+  options: {
+    skipHtmlTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+  },
+  svg: {
+    fontCache: 'global'
+  }
 };
 </script>
-<script defer src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js"></script>
+<script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3.2.2/es5/tex-svg-full.js"></script>
 <meta charset="utf-8"/>
 <meta content="width=device-width, initial-scale=1.0" name="viewport"/>
 <title>第1章 质点运动学｜五节完整HTML课件 v30</title>
