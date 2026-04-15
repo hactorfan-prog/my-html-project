@@ -3654,7 +3654,7 @@ function isOverflowing(slide){
 }
 
 function isUnderHalf(slide){
-  return pageFillRatio(slide) < 0.5;
+  return pageFillRatio(slide) < 0.72;
 }
 
 function isSplittable(slide){
@@ -3754,7 +3754,8 @@ function pullFromNext(current, next){
   tightenToFit(current);
   tightenToFit(next);
 
-  while(isUnderHalf(current) && nextBody.children.length){
+  const targetFill = Math.max(0.58, Math.min(0.8, isUnderHalf(next) ? 0.8 : 0.72));
+  while(pageFillRatio(current) < targetFill && nextBody.children.length){
     const first = nextBody.firstElementChild;
     currentBody.append(first);
     tightenToFit(current);
@@ -4016,6 +4017,7 @@ function enforceStrictPagination(forceFull=false){
     pass += 1;
   }while(changed && pass < 8);
 
+  rebalanceAutoPages();
   refreshSlides();
   document.querySelectorAll('.slide').forEach(slide => {
     forceReflow(slide);
