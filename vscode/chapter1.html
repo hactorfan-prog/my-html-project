@@ -3852,12 +3852,10 @@ function buildContinuationSlide(source, seq){
   return clone;
 }
 
-const MAX_CALC_CONTINUATIONS = 5;
+const MAX_AUTO_CONTINUATIONS = 2;
 
 function getContinuationLimit(slide){
-  const semanticType = slide?.dataset?.layoutType || detectSlideSemanticType(slide);
-  if(semanticType === 'calc') return MAX_CALC_CONTINUATIONS;
-  return Number.POSITIVE_INFINITY;
+  return MAX_AUTO_CONTINUATIONS;
 }
 
 function splitSlideWithOverflowTester(slide, overflowTester){
