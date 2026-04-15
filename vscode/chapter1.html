@@ -3367,6 +3367,69 @@ let rerunLayoutTimer = 0;
 const links=[...document.querySelectorAll('.toc a')];
 const progress=document.getElementById('progress');
 const FIT_CLASS_NAMES=['compact','tight'];
+const LAYOUT_PROFILES = {
+  normal: { minFit: 0, maxFit: 2, preferredFit: 0 },
+  cover: { minFit: 0, maxFit: 0, preferredFit: 0 },
+  'section-cover': { minFit: 0, maxFit: 0, preferredFit: 0 },
+  qna: { minFit: 0, maxFit: 2, preferredFit: 0 },
+  calc: { minFit: 1, maxFit: 2, preferredFit: 1 },
+  board: { minFit: 1, maxFit: 2, preferredFit: 1 },
+  summary: { minFit: 0, maxFit: 2, preferredFit: 1 },
+  merged: { minFit: 1, maxFit: 2, preferredFit: 1 },
+  hidden: { minFit: 0, maxFit: 2, preferredFit: 0 }
+};
+
+function fitLevelFromDensity(density){
+  if(density === 'relaxed') return 0;
+  if(density === 'compact') return 1;
+  if(density === 'tight') return 2;
+  return 0;
+}
+
+function detectSlideSemanticType(slide){
+  if(!slide) return 'normal';
+  if(slide.classList.contains('hidden-slide')) return 'hidden';
+  if(slide.classList.contains('cover')) return 'cover';
+  if(slide.classList.contains('section-cover')) return 'section-cover';
+  if(slide.classList.contains('board-slide') || slide.classList.contains('page-board-layout') || slide.classList.contains('page-board-hanging')) return 'board';
+  if(slide.classList.contains('summary-slide')) return 'summary';
+  if(slide.classList.contains('qna-large') || slide.classList.contains('page-qna-focus')) return 'qna';
+  if(slide.classList.contains('tight-calc') || slide.classList.contains('calc-continue') || slide.classList.contains('reply-slide')) return 'calc';
+  if(slide.classList.contains('merged-page') || slide.classList.contains('merge-6970')) return 'merged';
+  return 'normal';
+}
+
+function detectSlideDensityMode(slide){
+  if(!slide) return 'standard';
+  if(slide.classList.contains('sparse-page') || slide.classList.contains('big-text-page')) return 'relaxed';
+  if(slide.classList.contains('tight') || slide.classList.contains('tight-calc') || slide.classList.contains('calc-continue')) return 'tight';
+  if(slide.classList.contains('compact') || slide.classList.contains('dense') || slide.classList.contains('merged-page')) return 'compact';
+  return 'standard';
+}
+
+function getLayoutProfile(slide){
+  const type = slide?.dataset?.layoutType || detectSlideSemanticType(slide);
+  const density = slide?.dataset?.densityMode || detectSlideDensityMode(slide);
+  const base = LAYOUT_PROFILES[type] || LAYOUT_PROFILES.normal;
+  const densityFit = fitLevelFromDensity(density);
+  const minFit = Math.max(base.minFit, Math.min(2, densityFit));
+  const maxFit = Math.max(minFit, Math.min(2, base.maxFit));
+  const preferredFit = Math.min(maxFit, Math.max(minFit, base.preferredFit));
+  return { type, density, minFit, maxFit, preferredFit };
+}
+
+function applyLayoutRouting(slide){
+  if(!slide) return;
+  const profile = getLayoutProfile(slide);
+  if(!slide.dataset.layoutType) slide.dataset.layoutType = profile.type;
+  if(!slide.dataset.densityMode) slide.dataset.densityMode = profile.density;
+
+  Array.from(slide.classList)
+    .filter(cls => cls.startsWith('layout-') || cls.startsWith('density-'))
+    .forEach(cls => slide.classList.remove(cls));
+  slide.classList.add(`layout-${slide.dataset.layoutType}`);
+  slide.classList.add(`density-${slide.dataset.densityMode}`);
+}
 
 function scheduleRerunLayout(delay=80){
   if(!deckInitialized) return;
@@ -3410,8 +3473,17 @@ function stripContinueSuffix(text=''){
 
 function cacheBaseLayout(slide){
   if(!slide) return;
+  if(!slide.dataset.layoutType){
+    slide.dataset.layoutType = detectSlideSemanticType(slide);
+  }
+  if(!slide.dataset.densityMode){
+    slide.dataset.densityMode = detectSlideDensityMode(slide);
+  }
+  applyLayoutRouting(slide);
   if(!slide.dataset.baseFitLevel){
-    slide.dataset.baseFitLevel = slide.classList.contains('tight') ? '2' : slide.classList.contains('compact') ? '1' : '0';
+    const profile = getLayoutProfile(slide);
+    const classBase = slide.classList.contains('tight') ? 2 : slide.classList.contains('compact') ? 1 : 0;
+    slide.dataset.baseFitLevel = String(Math.max(profile.minFit, Math.min(profile.maxFit, classBase)));
   }
   if(!slide.dataset.sourceId){
     slide.dataset.sourceId = slide.id || ('slide-' + Math.random().toString(36).slice(2,8));
@@ -3429,8 +3501,11 @@ function cacheBaseLayout(slide){
 
 function applyFitLevel(slide, requestedLevel){
   cacheBaseLayout(slide);
+  const profile = getLayoutProfile(slide);
   const baseLevel = parseInt(slide.dataset.baseFitLevel || '0', 10);
-  const level = Math.max(baseLevel, Math.min(2, requestedLevel));
+  const minBound = Math.max(profile.minFit, baseLevel);
+  const maxBound = Math.max(minBound, profile.maxFit);
+  const level = Math.max(minBound, Math.min(maxBound, requestedLevel));
   FIT_CLASS_NAMES.forEach(cls => slide.classList.remove(cls));
   if(level >= 1) slide.classList.add('compact');
   if(level >= 2) slide.classList.add('tight');
@@ -3490,12 +3565,13 @@ function isSplittable(slide){
 
 function tightenToFit(slide){
   cacheBaseLayout(slide);
-  const baseLevel = parseInt(slide.dataset.baseFitLevel || '0', 10);
-  for(let level = baseLevel; level <= 2; level++){
+  const profile = getLayoutProfile(slide);
+  const baseLevel = Math.max(profile.minFit, parseInt(slide.dataset.baseFitLevel || '0', 10));
+  for(let level = baseLevel; level <= profile.maxFit; level++){
     applyFitLevel(slide, level);
     if(!isOverflowing(slide)) return true;
   }
-  applyFitLevel(slide, 2);
+  applyFitLevel(slide, profile.maxFit);
   return !isOverflowing(slide);
 }
 
@@ -3508,6 +3584,8 @@ function buildContinuationSlide(source, seq){
   clone.dataset.sourceId = source.dataset.sourceId;
   clone.dataset.baseFitLevel = source.dataset.baseFitLevel || '0';
   clone.dataset.fitLevel = source.dataset.fitLevel || source.dataset.baseFitLevel || '0';
+  clone.dataset.layoutType = source.dataset.layoutType || detectSlideSemanticType(source);
+  clone.dataset.densityMode = source.dataset.densityMode || detectSlideDensityMode(source);
   clone.dataset.baseTitle = source.dataset.baseTitle;
   clone.dataset.baseEyebrow = source.dataset.baseEyebrow;
   clone.dataset.baseIndex = source.dataset.baseIndex;
@@ -3785,6 +3863,7 @@ function enforceStrictPagination(){
   document.querySelectorAll('.auto-overflow-warning').forEach(s => s.classList.remove('auto-overflow-warning'));
   document.querySelectorAll('.slide').forEach(slide => {
     if(slide.classList.contains('auto-generated')) return;
+    applyLayoutRouting(slide);
     const base = parseInt(slide.dataset.baseFitLevel || (slide.classList.contains('tight') ? '2' : slide.classList.contains('compact') ? '1' : '0'), 10);
     applyFitLevel(slide, base);
     PRINT_FIT_CLASSES.forEach(cls => slide.classList.remove(cls));
