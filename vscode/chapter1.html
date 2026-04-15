@@ -1566,6 +1566,16 @@ span.math-inline.inline-small{
 .slide .math-inline.inline-var mjx-container[jax="SVG"]{
   vertical-align:-0.08em!important;
 }
+/* v45: 行内数学统一按正文缩放，修复“同一行个别字符明显偏大” */
+.slide p .math-inline mjx-container[jax="SVG"],
+.slide li .math-inline mjx-container[jax="SVG"],
+.slide h3 .math-inline mjx-container[jax="SVG"],
+.slide h4 .math-inline mjx-container[jax="SVG"],
+.slide h5 .math-inline mjx-container[jax="SVG"],
+.slide .label .math-inline mjx-container[jax="SVG"]{
+  font-size:.9em!important;
+  vertical-align:-0.08em!important;
+}
 </style>
 <style id="pdf-print-fix-v1">
 /* PDF print fix: formula-heavy pages tend to grow in print preview, so we
