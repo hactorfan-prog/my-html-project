@@ -3738,6 +3738,12 @@ function pageFillRatio(slide){
   return getBodyContentHeight(slide) / capacity;
 }
 
+const PAGE_SPLIT_FILL_THRESHOLD = 0.9;
+
+function reachedSplitThreshold(slide){
+  return pageFillRatio(slide) >= PAGE_SPLIT_FILL_THRESHOLD;
+}
+
 function isOverflowing(slide){
   return pageFillRatio(slide) > 1.0005;
 }
@@ -3846,12 +3852,10 @@ function buildContinuationSlide(source, seq){
   return clone;
 }
 
-const MAX_CALC_CONTINUATIONS = 5;
+const MAX_AUTO_CONTINUATIONS = 2;
 
 function getContinuationLimit(slide){
-  const semanticType = slide?.dataset?.layoutType || detectSlideSemanticType(slide);
-  if(semanticType === 'calc') return MAX_CALC_CONTINUATIONS;
-  return Number.POSITIVE_INFINITY;
+  return MAX_AUTO_CONTINUATIONS;
 }
 
 function splitSlideWithOverflowTester(slide, overflowTester){
@@ -3902,7 +3906,7 @@ function splitSlideWithOverflowTester(slide, overflowTester){
 }
 
 function splitSlideSmart(slide){
-  splitSlideWithOverflowTester(slide, isOverflowing);
+  splitSlideWithOverflowTester(slide, reachedSplitThreshold);
 }
 
 function splitSlideStrict(slide, overflowTester = slideOverflowInPrint){
