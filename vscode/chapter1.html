@@ -1556,11 +1556,13 @@ body[data-shadow-mode="off"] .export-status{
 #s129.extra-tight p,#s129.extra-tight li{margin:0.08em 0;}
 /* v44: 单字符数学变量与正文等高，避免出现“忽大忽小”的观感 */
 .slide .math-inline.inline-small,
-.slide .math-inline.inline-var,
 .slide .latin-run.small,
 .slide .var-inline.small,
 span.math-inline.inline-small{
   font-size:1em!important;
+}
+.slide .math-inline.inline-var{
+  font-size:.86em!important;
 }
 .slide .math-inline.inline-small mjx-container[jax="SVG"],
 .slide .math-inline.inline-var mjx-container[jax="SVG"]{
@@ -4616,11 +4618,27 @@ function normalizeInlineTokens(root=document){
   });
   root.querySelectorAll('.math-inline').forEach(el=>{
     el.classList.remove('inline-small','inline-var');
+    const raw = (el.getAttribute('data-raw-tex') || el.textContent || '')
+      .replace(/\s+/g,'')
+      .replace(/^\\\((.*)\\\)$/,'$1')
+      .replace(/^\$(.*)\$/,'$1');
+    if(/^(?:\\?[vwx])$/.test(raw)){
+      el.classList.add('inline-var');
+      return;
+    }
+    if(/^(?:\\?[A-Za-z])$/.test(raw)){
+      el.classList.add('inline-small');
+    }
   });
 }
 
 document.addEventListener('DOMContentLoaded', async ()=>{
   wrapLatinRuns();
+  document.querySelectorAll('.math-inline').forEach(el=>{
+    if(!el.hasAttribute('data-raw-tex')){
+      el.setAttribute('data-raw-tex', (el.textContent || '').trim());
+    }
+  });
   initThemeSystem();
   initDensitySystem();
   initShadowSystem();
