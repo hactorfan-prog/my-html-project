@@ -917,6 +917,8 @@ mjx-container, mjx-container *,
   --calc-question-size:22px;
   --calc-answer-size:20px;
   --calc-heading-size:20px;
+  --qa-unified-size:22px;
+  --qa-unified-heading-size:22px;
 }
 
 /* 问答题：题干略大，答案正文统一 */
@@ -972,6 +974,32 @@ mjx-container, mjx-container *,
   font-size:var(--calc-question-size)!important;
   line-height:1.44!important;
   font-weight:600!important;
+}
+
+
+/* v46: 作业 / 提问 / 问答题字号统一 */
+.slide.unified-qa-font .slide-body > p:first-child,
+.slide.unified-qa-font p,
+.slide.unified-qa-font li,
+.slide.unified-qa-font .label,
+.slide.unified-qa-font .answer-box p,
+.slide.unified-qa-font .answer-box li,
+.slide.unified-qa-font .question-panel p,
+.slide.unified-qa-font .question-panel li,
+.slide.unified-qa-font .answer-surface p,
+.slide.unified-qa-font .answer-surface li,
+.slide.unified-qa-font .answer-panel p,
+.slide.unified-qa-font .answer-panel li{
+  font-size:var(--qa-unified-size)!important;
+  line-height:1.46!important;
+}
+.slide.unified-qa-font .answer-box > h3,
+.slide.unified-qa-font .answer-box > h3.subitem,
+.slide.unified-qa-font .question-panel h5,
+.slide.unified-qa-font h3.same-level,
+.slide.unified-qa-font h3.subitem{
+  font-size:var(--qa-unified-heading-size)!important;
+  line-height:1.32!important;
 }
 
 /* v42 unified math naming: use math-inline / math-inline / math-display as the primary scheme */
@@ -3864,8 +3892,17 @@ function normalizeFormulaPresentation(root=document){
   });
 }
 
+function markUnifiedQaSlides(root=document){
+  const re = /^(?:课堂)?提问\d*|^问答题\d*|^作业\d*/;
+  root.querySelectorAll('.slide').forEach(slide => {
+    const title = (slide.querySelector('.slide-title-wrap h2')?.textContent || '').trim();
+    if(re.test(title)) slide.classList.add('unified-qa-font');
+  });
+}
+
 async function initDeck(){
   detectLargeDeckMode();
+  markUnifiedQaSlides();
   normalizeFormulaPresentation();
   await waitForMathJax();
   normalizeFormulaPresentation();
@@ -3876,6 +3913,7 @@ async function initDeck(){
 
 function rerunLayout(){
   detectLargeDeckMode();
+  markUnifiedQaSlides();
   normalizeFormulaPresentation();
   normalizeInlineTokens();
   enforcePagination(currentPaginationMode);
