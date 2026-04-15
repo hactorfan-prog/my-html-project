@@ -909,6 +909,71 @@ mjx-container, mjx-container *,
 .slide .board-head{line-height:var(--lh-subtitle)!important;}
 .slide .board-note.center{line-height:var(--lh-subtitle)!important;}
 
+/* v44: 题目页字号分层统一（问答题/计算题/板书题） */
+:root{
+  --qa-question-size:24px;
+  --qa-answer-size:22px;
+  --qa-heading-size:22px;
+  --calc-question-size:22px;
+  --calc-answer-size:20px;
+  --calc-heading-size:20px;
+}
+
+/* 问答题：题干略大，答案正文统一 */
+.slide.qna-large .slide-body > p:first-child{
+  font-size:var(--qa-question-size)!important;
+  line-height:1.52!important;
+  font-weight:600!important;
+}
+.slide.qna-large .answer-box > h3,
+.slide.qna-large .answer-box > h3.subitem,
+.slide.qna-large .question-panel h5{
+  font-size:var(--qa-heading-size)!important;
+  line-height:1.32!important;
+}
+.slide.qna-large .answer-box p,
+.slide.qna-large .answer-box li,
+.slide.qna-large .question-panel p,
+.slide.qna-large .question-panel li,
+.slide.qna-large .answer-surface p,
+.slide.qna-large .answer-surface li,
+.slide.qna-large .answer-panel p,
+.slide.qna-large .answer-panel li{
+  font-size:var(--qa-answer-size)!important;
+  line-height:1.46!important;
+}
+
+/* 计算/板书类页面：整体比问答题小一档，且同类型统一 */
+.slide.tight-calc p,.slide.tight-calc li,.slide.tight-calc .label,
+.slide.board-onepage p,.slide.board-onepage li,.slide.board-onepage .label,
+.slide.board-slide p,.slide.board-slide li,.slide.board-slide .board-label,.slide.board-slide .board-note,
+.page-board-layout p,.page-board-layout li,.page-board-layout .board-label,.page-board-layout .board-note,
+.page-board-hanging p,.page-board-hanging li,.page-board-hanging .board-label,.page-board-hanging .board-note,
+#s80 p,#s80 li,#s80 .board-label,#s80 .board-note,
+#s206 p,#s206 li,#s206 .board-label,#s206 .board-note,
+#s253 p,#s253 li,#s253 .board-label,#s253 .board-note{
+  font-size:var(--calc-answer-size)!important;
+  line-height:1.40!important;
+}
+.slide.tight-calc h3,
+.slide.board-onepage h3,
+.slide.board-slide h3,
+.page-board-layout .board-head,
+.page-board-hanging .board-head,
+#s80 .board-head,#s206 .board-head,#s253 .board-head{
+  font-size:var(--calc-heading-size)!important;
+  line-height:1.28!important;
+}
+.slide.tight-calc .slide-body > p:first-child,
+.slide.board-onepage .slide-body > p:first-child,
+.slide.board-slide .slide-body > p:first-child,
+.page-board-layout .slide-body > p:first-child,
+.page-board-hanging .slide-body > p:first-child{
+  font-size:var(--calc-question-size)!important;
+  line-height:1.44!important;
+  font-weight:600!important;
+}
+
 /* v42 unified math naming: use math-inline / math-inline / math-display as the primary scheme */
 
 
