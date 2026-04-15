@@ -1556,14 +1556,26 @@ body[data-shadow-mode="off"] .export-status{
 #s129.extra-tight p,#s129.extra-tight li{margin:0.08em 0;}
 /* v44: 单字符数学变量与正文等高，避免出现“忽大忽小”的观感 */
 .slide .math-inline.inline-small,
-.slide .math-inline.inline-var,
 .slide .latin-run.small,
 .slide .var-inline.small,
 span.math-inline.inline-small{
   font-size:1em!important;
 }
+.slide .math-inline.inline-var{
+  font-size:.86em!important;
+}
 .slide .math-inline.inline-small mjx-container[jax="SVG"],
 .slide .math-inline.inline-var mjx-container[jax="SVG"]{
+  vertical-align:-0.08em!important;
+}
+/* v45: 行内数学统一按正文缩放，修复“同一行个别字符明显偏大” */
+.slide p .math-inline mjx-container[jax="SVG"],
+.slide li .math-inline mjx-container[jax="SVG"],
+.slide h3 .math-inline mjx-container[jax="SVG"],
+.slide h4 .math-inline mjx-container[jax="SVG"],
+.slide h5 .math-inline mjx-container[jax="SVG"],
+.slide .label .math-inline mjx-container[jax="SVG"]{
+  font-size:.9em!important;
   vertical-align:-0.08em!important;
 }
 </style>
@@ -4606,11 +4618,24 @@ function normalizeInlineTokens(root=document){
   });
   root.querySelectorAll('.math-inline').forEach(el=>{
     el.classList.remove('inline-small','inline-var');
+    const raw = (el.getAttribute('data-raw-tex') || el.textContent || '')
+      .replace(/\s+/g,'')
+      .replace(/^\\\((.*)\\\)$/,'$1')
+      .replace(/^\$(.*)\$/,'$1');
+    // 仅缩放裸变量 x / v / w：如 x、\x、v、w；带下标/上标/函数形式不处理
+    if(/^(?:\\?[xvw])$/.test(raw)){
+      el.classList.add('inline-var');
+    }
   });
 }
 
 document.addEventListener('DOMContentLoaded', async ()=>{
   wrapLatinRuns();
+  document.querySelectorAll('.math-inline').forEach(el=>{
+    if(!el.hasAttribute('data-raw-tex')){
+      el.setAttribute('data-raw-tex', (el.textContent || '').trim());
+    }
+  });
   initThemeSystem();
   initDensitySystem();
   initShadowSystem();
