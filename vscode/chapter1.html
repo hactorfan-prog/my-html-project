@@ -3750,7 +3750,68 @@ function isSplittable(slide){
   if(!slide) return false;
   if(slide.classList.contains('cover') || slide.classList.contains('section-cover')) return false;
   const body=slide.querySelector('.slide-body');
-  return !!body && body.children.length > 1;
+  return !!body && canMoveTailChunk(body);
+}
+
+function isNestedSplitContainer(node){
+  if(!node || node.nodeType !== 1) return false;
+  const tag = node.tagName;
+  if(tag === 'UL' || tag === 'OL') return true;
+  if(tag !== 'DIV') return false;
+  return node.classList.contains('merge-block')
+    || node.classList.contains('section-block')
+    || node.classList.contains('panel')
+    || node.classList.contains('stack')
+    || node.classList.contains('answer-box');
+}
+
+function getTailMovePlan(body){
+  if(!body) return null;
+  if(body.children.length > 1){
+    const last = body.lastElementChild;
+    if(!last) return null;
+    return { level: 'body', source: body, node: last };
+  }
+
+  const only = body.firstElementChild;
+  if(!only) return null;
+  if(!isNestedSplitContainer(only)) return null;
+  if(only.children.length <= 1) return null;
+
+  const moved = only.lastElementChild;
+  if(!moved) return null;
+  return { level: 'nested', source: only, node: moved };
+}
+
+function canMoveTailChunk(body){
+  return !!getTailMovePlan(body);
+}
+
+function moveTailChunk(body, continuationBody){
+  const plan = getTailMovePlan(body);
+  if(!plan || !continuationBody) return false;
+
+  if(plan.level === 'body'){
+    plan.source.removeChild(plan.node);
+    continuationBody.prepend(plan.node);
+    return true;
+  }
+
+  const sourceContainer = plan.source;
+  sourceContainer.removeChild(plan.node);
+
+  const canReuse = continuationBody.firstElementChild
+    && continuationBody.firstElementChild.tagName === sourceContainer.tagName
+    && continuationBody.firstElementChild.className === sourceContainer.className;
+
+  let targetContainer = continuationBody.firstElementChild;
+  if(!canReuse){
+    targetContainer = sourceContainer.cloneNode(false);
+    if(targetContainer.removeAttribute) targetContainer.removeAttribute('id');
+    continuationBody.prepend(targetContainer);
+  }
+  targetContainer.prepend(plan.node);
+  return true;
 }
 
 function tightenToFit(slide){
@@ -3814,9 +3875,8 @@ function splitSlideWithOverflowTester(slide, overflowTester){
     const continuationBody = continuation.querySelector('.slide-body');
     let movedAny = false;
 
-    while(overflowTester(current) && body.children.length > 1){
-      const last = body.lastElementChild;
-      continuationBody.prepend(last);
+    while(overflowTester(current) && canMoveTailChunk(body)){
+      if(!moveTailChunk(body, continuationBody)) break;
       movedAny = true;
       tightenToFit(current);
       tightenToFit(continuation);
@@ -3944,6 +4004,18 @@ function normalizeFormulaPresentation(root=document){
   });
 }
 
+function normalizeHiddenSlides(root=document){
+  root.querySelectorAll('.slide.hidden-slide').forEach(slide => {
+    const body = slide.querySelector('.slide-body');
+    if(!body) return;
+    const hasElementContent = !!body.querySelector('*');
+    const hasTextContent = (body.textContent || '').replace(/\s+/g, '').length > 0;
+    if(hasElementContent || hasTextContent){
+      slide.classList.remove('hidden-slide');
+    }
+  });
+}
+
 function markUnifiedQaSlides(root=document){
   const re = /^(?:课堂)?提问\d*|^问答题\d*|^作业\d*/;
   root.querySelectorAll('.slide').forEach(slide => {
@@ -3953,6 +4025,8 @@ function markUnifiedQaSlides(root=document){
 }
 
 async function initDeck(){
+  detectLargeDeckMode();
+  normalizeHiddenSlides();
   detectLargeDeckMode();
   markUnifiedQaSlides();
   normalizeFormulaPresentation();
@@ -3964,6 +4038,8 @@ async function initDeck(){
 }
 
 function rerunLayout(){
+  detectLargeDeckMode();
+  normalizeHiddenSlides();
   detectLargeDeckMode();
   markUnifiedQaSlides();
   normalizeFormulaPresentation();
