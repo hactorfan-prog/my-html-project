@@ -294,23 +294,18 @@ p .math-display{display:block;margin:0}
 #s93 p,#s93 li,#s93 .label{font-size:26px!important;line-height:1.54!important}
 #s93 .formula-line{gap:10px!important;align-items:baseline!important}
 #s93 .math-display{font-size:1em!important}
-#s123 .slide-body{gap:8px!important}
-#s123 p,#s123 li,#s123 .label{font-size:21px!important;line-height:1.40!important}
-#s123 h3{font-size:21px!important;line-height:1.28!important}
-#s123 .merge-block{padding:10px 12px!important}
-#s123 .formula-line{gap:8px!important;align-items:baseline!important}
+.page-qna-focus .slide-body{gap:8px!important}
+.page-qna-focus p,.page-qna-focus li,.page-qna-focus .label{font-size:21px!important;line-height:1.40!important}
+.page-qna-focus h3{font-size:21px!important;line-height:1.28!important}
+.page-qna-focus .merge-block{padding:10px 12px!important}
+.page-qna-focus .formula-line{gap:8px!important;align-items:baseline!important}
 #s129 p,#s129 li,#s129 .label{font-size:20px!important;line-height:1.40!important}
 #s129 h3{font-size:20px!important;line-height:1.24!important}
 #s129 .math-display{font-size:1em!important}
-#s145 .slide-body{gap:8px!important}
-#s145 p,#s145 li,#s145 .label{font-size:20px!important;line-height:1.42!important}
-#s145 .formula-line{gap:8px!important;align-items:baseline!important}
-#s145 .math-display{font-size:1em!important}
-#s186 .slide-body{gap:8px!important}
-#s186 p,#s186 li,#s186 .label{font-size:21px!important;line-height:1.40!important}
-#s186 h3{font-size:21px!important;line-height:1.28!important}
-#s186 .merge-block{padding:10px 12px!important}
-#s186 .formula-line{gap:8px!important;align-items:baseline!important}
+.page-board-layout .slide-body{gap:8px!important}
+.page-board-layout p,.page-board-layout li,.page-board-layout .label{font-size:20px!important;line-height:1.42!important}
+.page-board-layout .formula-line{gap:8px!important;align-items:baseline!important}
+.page-board-layout .math-display{font-size:1em!important}
 .slide.tight h3{font-size:20px!important;line-height:1.24!important}
 .slide.tight .math-display{font-size:1em!important}
 .tight-calc p,.tight-calc li,.tight-calc .label{font-size:20px!important;line-height:1.42!important}
@@ -333,8 +328,8 @@ p .math-display{display:block;margin:0}
 .slide.tight h3,.slide.tight-calc h3,.slide.board-onepage h3{font-size:20px!important;line-height:1.24!important}
 .slide.big-text-page p,.slide.big-text-page li,.slide.big-text-page .label,.slide.sparse-page p,.slide.sparse-page li,.slide.sparse-page .label{font-size:28px!important;line-height:1.54!important}
 .slide.big-text-page h3,.slide.sparse-page h3{font-size:22px!important;line-height:1.26!important}
-#s206.tight p,#s206.tight li,#s206.tight .label,#s253.tight p,#s253.tight li,#s253.tight .label{font-size:20px!important;line-height:1.42!important}
-#s206 .slide-title-wrap h2,#s253 .slide-title-wrap h2,#s233_cont2 .slide-title-wrap h2,.slide.merge-6970 .slide-title-wrap h2{font-size:36px!important;line-height:1.2!important}
+.page-board-layout.tight p,.page-board-layout.tight li,.page-board-layout.tight .label{font-size:20px!important;line-height:1.42!important}
+.page-board-layout .slide-title-wrap h2,#s233_cont2 .slide-title-wrap h2,.slide.merge-6970 .slide-title-wrap h2{font-size:36px!important;line-height:1.2!important}
 
 /* formula presentation */
 .formula-line{display:grid!important;grid-template-columns:1fr!important;align-items:start!important;gap:4px!important}
@@ -489,13 +484,13 @@ p .math-display{display:block;margin:0}
 .slide.board-slide .board-note.center{line-height:1.30!important}
 
 /* Page 87 and page 147: tighten and clean to a single-page board layout */
-#s145 .slide-title-wrap h2,#s253 .slide-title-wrap h2{font-size:32px!important}
-#s145 .slide-body,#s253 .slide-body{gap:2px!important}
-#s145 .board-item,#s253 .board-item{margin-top:1px!important}
-#s145 .board-item.short .board-inline,#s253 .board-item.short .board-inline{gap:8px!important;max-width:100%!important}
-#s145 .board-item.long .math-display,#s253 .board-item.long .math-display{margin:0!important}
-#s145 .board-note,#s253 .board-note{padding-left:0.9em!important}
-#s145 .board-note.center,#s253 .board-note.center{padding-left:0!important}
+.page-board-layout .slide-title-wrap h2{font-size:32px!important}
+.page-board-layout .slide-body{gap:2px!important}
+.page-board-layout .board-item{margin-top:1px!important}
+.page-board-layout .board-item.short .board-inline{gap:8px!important;max-width:100%!important}
+.page-board-layout .board-item.long .math-display{margin:0!important}
+.page-board-layout .board-note{padding-left:0.9em!important}
+.page-board-layout .board-note.center{padding-left:0!important}
 
 /* v32: text stays left, formula centers in mixed text-formula blocks */
 .formula-line{
@@ -610,29 +605,26 @@ p .math-display{display:block;margin:0}
   gap:10px!important;
   justify-content:stretch!important;
 }
-#s253 .board-item.short .board-label{
+.page-board-layout.board-slide .board-item.short .board-label{
   justify-self:start!important;
   text-align:left!important;
 }
-#s253 .board-item.short .math-inline{
+.page-board-layout.board-slide .board-item.short .math-inline{
   justify-self:center!important;
   text-align:center!important;
 }
-#s253 .board-item.short .math-inline mjx-container{
+.page-board-layout.board-slide .board-item.short .math-inline mjx-container{
   font-size:1em!important;
 }
 
 /* v34: page 120 and 147 board pages use left-hanging formulas instead of centered formulas */
-#s206 .slide-body,
-#s253 .slide-body{
+.page-board-hanging .slide-body{
   gap:6px!important;
 }
-#s206 .board-head,
-#s253 .board-head{
+.page-board-hanging .board-head{
   margin:0!important;
 }
-#s206 .board-item,
-#s253 .board-item{
+.page-board-hanging .board-item{
   display:grid!important;
   grid-template-columns:7.2em minmax(0,1fr)!important;
   column-gap:.7em!important;
@@ -640,22 +632,18 @@ p .math-display{display:block;margin:0}
   align-items:start!important;
   margin-top:2px!important;
 }
-#s206 .board-item.short .board-inline,
-#s253 .board-item.short .board-inline{
+.page-board-hanging .board-item.short .board-inline{
   display:contents!important;
 }
-#s206 .board-item .board-label,
-#s253 .board-item .board-label{
+.page-board-hanging .board-item .board-label{
   grid-column:1!important;
   justify-self:start!important;
   text-align:left!important;
   white-space:nowrap!important;
   font-weight:700!important;
 }
-#s206 .board-item .math-inline,
-#s206 .board-item .math-display,
-#s253 .board-item .math-inline,
-#s253 .board-item .math-display{
+.page-board-hanging .board-item .math-inline,
+.page-board-hanging .board-item .math-display{
   grid-column:2!important;
   display:block!important;
   width:auto!important;
@@ -664,39 +652,31 @@ p .math-display{display:block;margin:0}
   text-align:left!important;
   justify-self:start!important;
 }
-#s206 .board-item .math-inline mjx-container,
-#s206 .board-item .math-display mjx-container,
-#s253 .board-item .math-inline mjx-container,
-#s253 .board-item .math-display mjx-container{
+.page-board-hanging .board-item .math-inline mjx-container,
+.page-board-hanging .board-item .math-display mjx-container{
   display:inline-block!important;
 }
-#s206 .board-item .board-note,
-#s253 .board-item .board-note{
+.page-board-hanging .board-item .board-note{
   grid-column:2!important;
   padding-left:0!important;
   text-align:left!important;
   color:#4a6076!important;
 }
-#s206 .board-item .board-note.center,
-#s253 .board-item .board-note.center{
+.page-board-hanging .board-item .board-note.center{
   padding-left:0!important;
   text-align:left!important;
 }
-#s206 .board-item.long .board-label,
-#s253 .board-item.long .board-label{
+.page-board-hanging .board-item.long .board-label{
   padding-top:1px!important;
 }
-#s206 .board-item.long .math-display,
-#s253 .board-item.long .math-display{
+.page-board-hanging .board-item.long .math-display{
   line-height:1.24!important;
 }
-#s206 .board-item.long .math-display + .math-display,
-#s253 .board-item.long .math-display + .math-display{
+.page-board-hanging .board-item.long .math-display + .math-display{
   margin-top:1px!important;
 }
 /* keep the last method line compact and board-like */
-#s253 .board-item:last-child .board-note,
-#s206 .board-item:last-child .board-note{
+.page-board-hanging .board-item:last-child .board-note{
   font-weight:600!important;
   color:#34506b!important;
 }
@@ -2591,7 +2571,7 @@ body.print-measure .slide.print-fit-4{
 </ol><p>例如取竖直向上为正方向时，上抛运动中<span class="math-inline inline-small">\(v &gt; 0\)</span>，但<span class="math-inline inline-small">\(a = - g &lt; 0\)</span>，说明速度和加速度方向相反，因此物体减速。可见，单独看<span class="math-inline inline-small">\(a &lt; 0\)</span>是无法断定其一定减速的。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide compact qna-large big-text-page" id="s123">
+<section class="slide compact qna-large big-text-page page-qna-focus" id="s123">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第三节｜六、问答题（附详细解答）</div>
 <div class="slide-index">75 / 147</div>
@@ -2719,7 +2699,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><p>为什么说“瞬时物理量”的引入体现了物理学研究从粗略描述走向精确描述？</p><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><p>平均量只能描述一段时间或一段过程的整体效果，例如平均速度只能反映一段时间内总体的位置变化快慢，无法指出某一时刻究竟怎样运动。</p><div class="formula-line"><span class="label">而瞬时量是通过极限方法，把考察区间缩小到无限短，从而得到某一瞬间的物理状态。例如：</span><span class="math-display">\[\vec{v} = \lim_{\Delta t \rightarrow 0}\frac{\Delta\vec{r}}{\Delta t}\]</span></div><p>这使我们能够在连续变化的运动过程中，精确刻画某一时刻的位置变化趋势。同样，加速度的引入也是如此。可以说，极限思想和微积分工具，使物理学从对过程的粗略把握，上升到对瞬间状态的精确定量描述。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide board-slide" id="s145">
+<section class="slide board-slide page-board-layout" id="s145">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第三节｜九、板书设计建议</div>
 <div class="slide-index">87 / 147</div>
@@ -2965,7 +2945,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><p>为什么说“向心加速度”不是一种额外的第三种加速度，而是法向加速度在圆周运动中的特殊名称？</p><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><p>在一般平面曲线运动中，加速度都可以分解为切向分量和法向分量。法向分量始终沿曲线法线方向，指向轨迹凹侧，反映速度方向变化的快慢。</p><p>对圆周运动来说，轨迹的法线方向始终指向圆心，因此法向加速度也就始终指向圆心。正因为它“向着圆心”，所以又叫向心加速度。</p><p>也就是说，向心加速度并不是除了法向加速度和切向加速度以外又冒出来的第三种加速度，而只是圆周运动中法向加速度的特殊表现形式。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide compact qna-large sparse-page big-text-page" id="s186">
+<section class="slide compact qna-large sparse-page big-text-page page-qna-focus" id="s186">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第四节｜六、问答题（附详细解答）</div>
 <div class="slide-index">112 / 147</div>
@@ -3037,7 +3017,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><p>为什么在刚体定轴转动或圆周运动问题中，角量描述常常比线量描述更简洁？</p><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><p>因为在同一转动系统中，各点虽然线速度、线加速度可能因半径不同而不同，但它们在同一时间内转过的角位移、角速度和角加速度往往具有统一性。</p><p>例如，风扇叶片上不同点的角速度相同，而线速度却随半径变化。如果直接用线量分别描述每个点，会显得零散；若先用角量统一描述整体转动，再通过</p><p><span class="math-display">\[v = R\omega,\,a_{\tau} = R\beta,\,a_{n} = R\omega^{2}\]</span></p><p>转换到某一点的线量，就会更清晰、更高效。</p><p>这也是后续学习刚体转动时为什么总是优先引入角位置、角速度、角加速度的根本原因。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide board-slide" id="s206">
+<section class="slide board-slide page-board-hanging" id="s206">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第四节｜九、板书设计建议</div>
 <div class="slide-index">120 / 147</div>
@@ -3328,7 +3308,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><p>为什么在学习相对运动之后，很多“看起来不同”的运动题会突然变得属于同一类问题？</p><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><p>因为相对运动提供了一个更高层次的统一框架。火车上行走、船渡河、传送带、升降平台、移动病床、流水中的漂浮物，这些现象表面背景不同，但本质上都可以归结为：对象相对中间参考系运动，同时中间参考系又相对目标参考系运动。</p><p>一旦认识到这一点，题目的形式差异就不再重要，真正重要的是参考系的分层关系和速度、加速度的矢量合成关系。</p><p>这正是大学物理训练学生能力的地方：不是死记题型，而是学会用统一模型识别不同现象背后的同一规律。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide board-slide" id="s253">
+<section class="slide board-slide page-board-layout page-board-hanging" id="s253">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第五节｜九、板书设计建议</div>
 <div class="slide-index">147 / 147</div>
