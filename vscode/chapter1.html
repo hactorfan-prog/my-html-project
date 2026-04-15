@@ -1597,7 +1597,7 @@ body.print-measure .slide{
   border-radius:0!important;
   box-shadow:none!important;
   page-break-after:always!important;
-  padding:0.28in 0.36in 0.20in 0.44in!important;
+  padding:0.292in 0.375in 0.229in 0.583in!important;
   overflow:hidden!important;
 }
 body.print-measure .slide:last-child{page-break-after:auto!important}
@@ -1606,27 +1606,31 @@ body.print-measure.print-current .slide{display:none!important}
 body.print-measure.print-current .slide.print-target{display:flex!important;page-break-after:auto!important}
 
 @media print{
-  .slide{
-    --print-title-size:31px;
-    --print-h3-size:20px;
-    --print-body-size:19px;
-    --print-math-size:19px;
-    --print-body-lh:1.30;
-    --print-sub-lh:1.20;
-    --print-gap:6px;
+  body{
+    -webkit-print-color-adjust:exact!important;
+    print-color-adjust:exact!important;
   }
-  .slide{padding:0.28in 0.36in 0.20in 0.44in!important}
-  .slide .slide-title-wrap h2{font-size:var(--print-title-size)!important;line-height:1.14!important}
+  .slide{
+    --print-title-size:36px;
+    --print-h3-size:22px;
+    --print-body-size:24px;
+    --print-math-size:24px;
+    --print-body-lh:1.56;
+    --print-sub-lh:1.28;
+    --print-gap:10px;
+  }
+  .slide{padding:0.292in 0.375in 0.229in 0.583in!important}
+  .slide .slide-title-wrap h2{font-size:var(--print-title-size)!important;line-height:1.2!important}
   .slide h3,.slide h4,.slide h5,.slide .board-head{font-size:var(--print-h3-size)!important;line-height:var(--print-sub-lh)!important}
   .slide p,.slide li,.slide .label,.slide .board-label,.slide .board-note,.slide .meta-card,.slide .quote-box,.slide .lead{
     font-size:var(--print-body-size)!important;line-height:var(--print-body-lh)!important
   }
   .slide .slide-body{gap:var(--print-gap)!important}
   .slide .merge-block,.slide .section-block,.slide .panel,.slide .answer-box,.slide .answer-surface,.slide .question-panel,.slide .answer-panel{
-    padding:10px 12px!important
+    padding:20px!important
   }
-  .slide .footer-note,.slide .eyebrow,.slide .slide-index{font-size:13px!important;line-height:1.16!important}
-  .slide .math-display{margin:0!important;padding:0!important;line-height:1.10!important}
+  .slide .footer-note,.slide .eyebrow,.slide .slide-index{font-size:16px!important;line-height:1.2!important}
+  .slide .math-display{margin:6px 0 2px!important;padding:4px 0!important;line-height:1.18!important}
   .slide mjx-container[jax="SVG"]{font-size:var(--print-math-size)!important;line-height:1!important}
 
   .slide.print-fit-1{
@@ -1660,15 +1664,15 @@ body.print-measure.print-current .slide.print-target{display:flex!important;page
 }
 
 body.print-measure .slide{
-  --print-title-size:31px;
-  --print-h3-size:20px;
-  --print-body-size:19px;
-  --print-math-size:19px;
-  --print-body-lh:1.30;
-  --print-sub-lh:1.20;
-  --print-gap:6px;
+  --print-title-size:36px;
+  --print-h3-size:22px;
+  --print-body-size:24px;
+  --print-math-size:24px;
+  --print-body-lh:1.56;
+  --print-sub-lh:1.28;
+  --print-gap:10px;
 }
-body.print-measure .slide .slide-title-wrap h2{font-size:var(--print-title-size)!important;line-height:1.14!important}
+body.print-measure .slide .slide-title-wrap h2{font-size:var(--print-title-size)!important;line-height:1.2!important}
 body.print-measure .slide h3,
 body.print-measure .slide h4,
 body.print-measure .slide h5,
@@ -1688,11 +1692,11 @@ body.print-measure .slide .panel,
 body.print-measure .slide .answer-box,
 body.print-measure .slide .answer-surface,
 body.print-measure .slide .question-panel,
-body.print-measure .slide .answer-panel{padding:10px 12px!important}
+body.print-measure .slide .answer-panel{padding:20px!important}
 body.print-measure .slide .footer-note,
 body.print-measure .slide .eyebrow,
-body.print-measure .slide .slide-index{font-size:13px!important;line-height:1.16!important}
-body.print-measure .slide .math-display{margin:0!important;padding:0!important;line-height:1.10!important}
+body.print-measure .slide .slide-index{font-size:16px!important;line-height:1.2!important}
+body.print-measure .slide .math-display{margin:6px 0 2px!important;padding:4px 0!important;line-height:1.18!important}
 body.print-measure .slide mjx-container[jax="SVG"]{font-size:var(--print-math-size)!important;line-height:1!important}
 body.print-measure .slide.print-fit-1{
   --print-title-size:30px;
