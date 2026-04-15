@@ -30,9 +30,11 @@ window.MathJax = {
 <title>第1章 质点运动学｜五节完整HTML课件 v30</title>
 <style>
 :root{
-  --font-latin:"Times New Roman","Times","Nimbus Roman No9 L",serif;
-  --font-cjk:"Microsoft YaHei","PingFang SC","Noto Sans SC",sans-serif;
-  --font-mix:"Times New Roman","Times","Nimbus Roman No9 L","Microsoft YaHei","PingFang SC","Noto Sans SC",sans-serif;
+  --font-ui:"Microsoft YaHei","微软雅黑","PingFang SC","Noto Sans SC","Segoe UI",sans-serif;
+  --font-math:"Times New Roman","Times","Nimbus Roman No9 L","Cambria Math",serif;
+  --font-cjk:var(--font-ui);
+  --font-latin:var(--font-math);
+  --font-mix:var(--font-ui);
   --bg:#f4f8fd;--panel:rgba(255,255,255,.88);--panel2:rgba(255,255,255,.95);--text:#15324d;--sub:#5f768e;
   --line:rgba(74,144,226,.18);--acc:#4a90e2;--acc2:#7d7aff;--shadow:0 18px 42px rgba(28,66,110,.12);
   --slide-w:min(96vw,1366px);--slide-h:min(calc(96vw * 9 / 16),768px);--title:42px;--h2:36px;--h3:22px;--body:24px;--small:15px;
@@ -816,12 +818,7 @@ p .math-display{display:block;margin:0}
   padding-left: .2em!important;
 }
 
-/* ===== 字体统一覆盖：中文正文=微软雅黑；英文/公式=Times New Roman ===== */
-:root{
-  --font-latin:"Times New Roman","Times","Nimbus Roman No9 L",serif;
-  --font-cjk:"Microsoft YaHei","微软雅黑","PingFang SC","Noto Sans SC",sans-serif;
-  --font-mix:"Microsoft YaHei","微软雅黑","PingFang SC","Noto Sans SC",sans-serif;
-}
+/* ===== 字体统一覆盖：变量在顶部 :root 定义，这里只做应用层覆盖 ===== */
 body,
 button,input,textarea,select,
 h1,h2,h3,h4,h5,p,li,ol,ul,
@@ -3367,6 +3364,69 @@ let rerunLayoutTimer = 0;
 const links=[...document.querySelectorAll('.toc a')];
 const progress=document.getElementById('progress');
 const FIT_CLASS_NAMES=['compact','tight'];
+const LAYOUT_PROFILES = {
+  normal: { minFit: 0, maxFit: 2, preferredFit: 0 },
+  cover: { minFit: 0, maxFit: 0, preferredFit: 0 },
+  'section-cover': { minFit: 0, maxFit: 0, preferredFit: 0 },
+  qna: { minFit: 0, maxFit: 2, preferredFit: 0 },
+  calc: { minFit: 1, maxFit: 2, preferredFit: 1 },
+  board: { minFit: 1, maxFit: 2, preferredFit: 1 },
+  summary: { minFit: 0, maxFit: 2, preferredFit: 1 },
+  merged: { minFit: 1, maxFit: 2, preferredFit: 1 },
+  hidden: { minFit: 0, maxFit: 2, preferredFit: 0 }
+};
+
+function fitLevelFromDensity(density){
+  if(density === 'relaxed') return 0;
+  if(density === 'compact') return 1;
+  if(density === 'tight') return 2;
+  return 0;
+}
+
+function detectSlideSemanticType(slide){
+  if(!slide) return 'normal';
+  if(slide.classList.contains('hidden-slide')) return 'hidden';
+  if(slide.classList.contains('cover')) return 'cover';
+  if(slide.classList.contains('section-cover')) return 'section-cover';
+  if(slide.classList.contains('board-slide') || slide.classList.contains('page-board-layout') || slide.classList.contains('page-board-hanging')) return 'board';
+  if(slide.classList.contains('summary-slide')) return 'summary';
+  if(slide.classList.contains('qna-large') || slide.classList.contains('page-qna-focus')) return 'qna';
+  if(slide.classList.contains('tight-calc') || slide.classList.contains('calc-continue') || slide.classList.contains('reply-slide')) return 'calc';
+  if(slide.classList.contains('merged-page') || slide.classList.contains('merge-6970')) return 'merged';
+  return 'normal';
+}
+
+function detectSlideDensityMode(slide){
+  if(!slide) return 'standard';
+  if(slide.classList.contains('sparse-page') || slide.classList.contains('big-text-page')) return 'relaxed';
+  if(slide.classList.contains('tight') || slide.classList.contains('tight-calc') || slide.classList.contains('calc-continue')) return 'tight';
+  if(slide.classList.contains('compact') || slide.classList.contains('dense') || slide.classList.contains('merged-page')) return 'compact';
+  return 'standard';
+}
+
+function getLayoutProfile(slide){
+  const type = slide?.dataset?.layoutType || detectSlideSemanticType(slide);
+  const density = slide?.dataset?.densityMode || detectSlideDensityMode(slide);
+  const base = LAYOUT_PROFILES[type] || LAYOUT_PROFILES.normal;
+  const densityFit = fitLevelFromDensity(density);
+  const minFit = Math.max(base.minFit, Math.min(2, densityFit));
+  const maxFit = Math.max(minFit, Math.min(2, base.maxFit));
+  const preferredFit = Math.min(maxFit, Math.max(minFit, base.preferredFit));
+  return { type, density, minFit, maxFit, preferredFit };
+}
+
+function applyLayoutRouting(slide){
+  if(!slide) return;
+  const profile = getLayoutProfile(slide);
+  if(!slide.dataset.layoutType) slide.dataset.layoutType = profile.type;
+  if(!slide.dataset.densityMode) slide.dataset.densityMode = profile.density;
+
+  Array.from(slide.classList)
+    .filter(cls => cls.startsWith('layout-') || cls.startsWith('density-'))
+    .forEach(cls => slide.classList.remove(cls));
+  slide.classList.add(`layout-${slide.dataset.layoutType}`);
+  slide.classList.add(`density-${slide.dataset.densityMode}`);
+}
 
 function scheduleRerunLayout(delay=80){
   if(!deckInitialized) return;
@@ -3410,8 +3470,17 @@ function stripContinueSuffix(text=''){
 
 function cacheBaseLayout(slide){
   if(!slide) return;
+  if(!slide.dataset.layoutType){
+    slide.dataset.layoutType = detectSlideSemanticType(slide);
+  }
+  if(!slide.dataset.densityMode){
+    slide.dataset.densityMode = detectSlideDensityMode(slide);
+  }
+  applyLayoutRouting(slide);
   if(!slide.dataset.baseFitLevel){
-    slide.dataset.baseFitLevel = slide.classList.contains('tight') ? '2' : slide.classList.contains('compact') ? '1' : '0';
+    const profile = getLayoutProfile(slide);
+    const classBase = slide.classList.contains('tight') ? 2 : slide.classList.contains('compact') ? 1 : 0;
+    slide.dataset.baseFitLevel = String(Math.max(profile.minFit, Math.min(profile.maxFit, classBase)));
   }
   if(!slide.dataset.sourceId){
     slide.dataset.sourceId = slide.id || ('slide-' + Math.random().toString(36).slice(2,8));
@@ -3429,8 +3498,11 @@ function cacheBaseLayout(slide){
 
 function applyFitLevel(slide, requestedLevel){
   cacheBaseLayout(slide);
+  const profile = getLayoutProfile(slide);
   const baseLevel = parseInt(slide.dataset.baseFitLevel || '0', 10);
-  const level = Math.max(baseLevel, Math.min(2, requestedLevel));
+  const minBound = Math.max(profile.minFit, baseLevel);
+  const maxBound = Math.max(minBound, profile.maxFit);
+  const level = Math.max(minBound, Math.min(maxBound, requestedLevel));
   FIT_CLASS_NAMES.forEach(cls => slide.classList.remove(cls));
   if(level >= 1) slide.classList.add('compact');
   if(level >= 2) slide.classList.add('tight');
@@ -3490,12 +3562,13 @@ function isSplittable(slide){
 
 function tightenToFit(slide){
   cacheBaseLayout(slide);
-  const baseLevel = parseInt(slide.dataset.baseFitLevel || '0', 10);
-  for(let level = baseLevel; level <= 2; level++){
+  const profile = getLayoutProfile(slide);
+  const baseLevel = Math.max(profile.minFit, parseInt(slide.dataset.baseFitLevel || '0', 10));
+  for(let level = baseLevel; level <= profile.maxFit; level++){
     applyFitLevel(slide, level);
     if(!isOverflowing(slide)) return true;
   }
-  applyFitLevel(slide, 2);
+  applyFitLevel(slide, profile.maxFit);
   return !isOverflowing(slide);
 }
 
@@ -3508,6 +3581,8 @@ function buildContinuationSlide(source, seq){
   clone.dataset.sourceId = source.dataset.sourceId;
   clone.dataset.baseFitLevel = source.dataset.baseFitLevel || '0';
   clone.dataset.fitLevel = source.dataset.fitLevel || source.dataset.baseFitLevel || '0';
+  clone.dataset.layoutType = source.dataset.layoutType || detectSlideSemanticType(source);
+  clone.dataset.densityMode = source.dataset.densityMode || detectSlideDensityMode(source);
   clone.dataset.baseTitle = source.dataset.baseTitle;
   clone.dataset.baseEyebrow = source.dataset.baseEyebrow;
   clone.dataset.baseIndex = source.dataset.baseIndex;
@@ -3785,6 +3860,7 @@ function enforceStrictPagination(){
   document.querySelectorAll('.auto-overflow-warning').forEach(s => s.classList.remove('auto-overflow-warning'));
   document.querySelectorAll('.slide').forEach(slide => {
     if(slide.classList.contains('auto-generated')) return;
+    applyLayoutRouting(slide);
     const base = parseInt(slide.dataset.baseFitLevel || (slide.classList.contains('tight') ? '2' : slide.classList.contains('compact') ? '1' : '0'), 10);
     applyFitLevel(slide, base);
     PRINT_FIT_CLASSES.forEach(cls => slide.classList.remove(cls));
