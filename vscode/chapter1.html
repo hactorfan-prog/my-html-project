@@ -3750,7 +3750,57 @@ function isSplittable(slide){
   if(!slide) return false;
   if(slide.classList.contains('cover') || slide.classList.contains('section-cover')) return false;
   const body=slide.querySelector('.slide-body');
-  return !!body && body.children.length > 1;
+  return !!body && canExtractTailChunk(body);
+}
+
+function cloneContainerShell(node){
+  const shell = node.cloneNode(false);
+  if(shell.removeAttribute){
+    shell.removeAttribute('id');
+  }
+  return shell;
+}
+
+function extractTailChunk(body){
+  if(!body) return null;
+  if(body.children.length > 1){
+    const last = body.lastElementChild;
+    if(!last) return null;
+    body.removeChild(last);
+    return last;
+  }
+
+  const only = body.firstElementChild;
+  if(!only) return null;
+  const tag = only.tagName;
+  const nestedSplittable =
+    (tag === 'UL' || tag === 'OL') ||
+    only.classList.contains('merge-block') ||
+    only.classList.contains('section-block') ||
+    only.classList.contains('panel');
+  if(!nestedSplittable) return null;
+  if(only.children.length <= 1) return null;
+
+  const moved = only.lastElementChild;
+  if(!moved) return null;
+  only.removeChild(moved);
+  const wrapper = cloneContainerShell(only);
+  wrapper.appendChild(moved);
+  return wrapper;
+}
+
+function canExtractTailChunk(body){
+  if(!body) return false;
+  if(body.children.length > 1) return true;
+  const only = body.firstElementChild;
+  if(!only) return false;
+  const tag = only.tagName;
+  const nestedSplittable =
+    (tag === 'UL' || tag === 'OL') ||
+    only.classList.contains('merge-block') ||
+    only.classList.contains('section-block') ||
+    only.classList.contains('panel');
+  return nestedSplittable && only.children.length > 1;
 }
 
 function tightenToFit(slide){
@@ -3814,9 +3864,10 @@ function splitSlideWithOverflowTester(slide, overflowTester){
     const continuationBody = continuation.querySelector('.slide-body');
     let movedAny = false;
 
-    while(overflowTester(current) && body.children.length > 1){
-      const last = body.lastElementChild;
-      continuationBody.prepend(last);
+    while(overflowTester(current) && canExtractTailChunk(body)){
+      const tailChunk = extractTailChunk(body);
+      if(!tailChunk) break;
+      continuationBody.prepend(tailChunk);
       movedAny = true;
       tightenToFit(current);
       tightenToFit(continuation);
