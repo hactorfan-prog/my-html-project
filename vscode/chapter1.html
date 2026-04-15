@@ -1731,7 +1731,7 @@ body.print-measure .slide.print-fit-4{
 </head>
 <body>
 <div class="progress-wrap"><div class="progress" id="progress"></div></div>
-<header class="topbar"><div class="brand"><div class="brand-badge">📘</div><div class="brand-text"><strong>第1章 质点运动学｜五节完整课件 v31</strong><span>模板标准收口 + 严格分页 + 阴影强度/日期可调</span></div></div><div class="toolbar"><a class="btn" href="#s1">章节首页</a><a class="btn" href="#s2">第一节</a><a class="btn" href="#s46">第二节</a><a class="btn" href="#s81">第三节</a><a class="btn" href="#s147">第四节</a><a class="btn" href="#s208">第五节</a><button class="btn" id="prevBtn">上一页</button><button class="btn" id="nextBtn">下一页</button><button class="btn" id="printCurrentBtn" type="button">打印当前页</button><button class="btn" id="printAllBtn" type="button">打印全部</button><button class="btn" id="exportPptBtn" type="button">另存为PPT</button><button class="btn" id="themeToggleBtn" type="button">场景：日常授课</button><button class="btn" id="densityToggleBtn" type="button">版式：标准</button><button class="btn" id="shadowToggleBtn" type="button">阴影：中</button><button class="btn" id="dateToggleBtn" type="button">日期：2026年3月24日</button><button class="btn primary" id="fsBtn">全屏</button><button class="btn topbar-toggle" id="toggleTopbarBtn" type="button">隐藏快捷栏</button></div></header><button class="show-topbar-btn" id="showTopbarBtn" type="button">显示快捷栏</button>
+<header class="topbar"><div class="brand"><div class="brand-badge">📘</div><div class="brand-text"><strong>第1章 质点运动学｜五节完整课件 v31</strong><span>模板标准收口 + 严格分页 + 阴影强度/日期可调</span></div></div><div class="toolbar"><a class="btn" href="#s1">章节首页</a><a class="btn" href="#s2">第一节</a><a class="btn" href="#s46">第二节</a><a class="btn" href="#s81">第三节</a><a class="btn" href="#s147">第四节</a><a class="btn" href="#s208">第五节</a><button class="btn" id="prevBtn">上一页</button><button class="btn" id="nextBtn">下一页</button><button class="btn" id="printCurrentBtn" type="button">另存当前页PDF</button><button class="btn" id="printAllBtn" type="button">另存全部PDF</button><button class="btn" id="exportPptBtn" type="button">另存为PPT</button><button class="btn" id="themeToggleBtn" type="button">场景：日常授课</button><button class="btn" id="densityToggleBtn" type="button">版式：标准</button><button class="btn" id="shadowToggleBtn" type="button">阴影：中</button><button class="btn" id="dateToggleBtn" type="button">日期：2026年3月24日</button><button class="btn primary" id="fsBtn">全屏</button><button class="btn topbar-toggle" id="toggleTopbarBtn" type="button">隐藏快捷栏</button></div></header><button class="show-topbar-btn" id="showTopbarBtn" type="button">显示快捷栏</button>
 <div class="theme-panel" id="themePanel" hidden>
   <div class="theme-panel-title">课件显示场景</div>
   <div class="theme-panel-sub">不再按颜色命名，而是按使用场景选择。切换后会立即全局生效，并会记住你上次的选择。</div>
@@ -3929,14 +3929,14 @@ function enforceStrictPagination(){
   updateUI();
 }
 
-const PRINT_SETTINGS_HINT = '打印建议：纸张请选择“自定义 13.333in × 7.5in（16:9）”，缩放 100%，不要选择 A4，也不要选择“适应页面”。';
+const PDF_EXPORT_HINT = 'PDF 导出建议：在系统弹窗里将“目标打印机”改为“另存为 PDF”，纸张请选择“自定义 13.333in × 7.5in（16:9）”，缩放 100%，不要选择 A4，也不要选择“适应页面”。';
 
-function showPrintSettingsHint(){
+function showPdfExportHint(){
   try{
-    if(sessionStorage.getItem('print-paper-hint-shown') === '1') return;
-    sessionStorage.setItem('print-paper-hint-shown','1');
+    if(sessionStorage.getItem('pdf-export-hint-shown') === '1') return;
+    sessionStorage.setItem('pdf-export-hint-shown','1');
   }catch(_err){}
-  window.alert(PRINT_SETTINGS_HINT);
+  window.alert(PDF_EXPORT_HINT);
 }
 
 function preparePrintLayout(){
@@ -3954,22 +3954,89 @@ function finalizePrintCleanup(){
   clearPrintTarget();
 }
 
-function printCurrentPage(){
+function buildPrintableHtml(slidesToPrint, docTitle){
+  const styleText = [...document.querySelectorAll('style')]
+    .map(node => node.textContent || '')
+    .join('\n');
+  const slideHtml = slidesToPrint
+    .map(slide => {
+      const clone = slide.cloneNode(true);
+      clone.classList.remove('hidden-slide', 'auto-generated', 'auto-overflow-warning');
+      PRINT_FIT_CLASSES.forEach(cls => clone.classList.remove(cls));
+      clone.removeAttribute('data-print-overflow');
+      return clone.outerHTML;
+    })
+    .join('\n');
+
+  return `<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${docTitle || document.title}</title>
+  <style>${styleText}</style>
+  <style>
+    body{background:#fff!important}
+    .topbar,.toc,.progress-wrap,.show-topbar-btn,.export-status,.theme-panel,.density-panel,.date-panel{display:none!important}
+    main{padding:0!important}
+    .deck{gap:0!important}
+    .slide{box-shadow:none!important}
+  </style>
+</head>
+<body>
+  <main><section class="deck">${slideHtml}</section></main>
+</body>
+</html>`;
+}
+
+function openPrintWindow(slidesToPrint, docTitle){
+  if(!slidesToPrint || !slidesToPrint.length){
+    window.alert('没有可导出的页面。');
+    return;
+  }
+  const printWindow = window.open('', '_blank');
+  if(!printWindow){
+    window.alert('浏览器拦截了导出窗口，请允许弹窗后再试。');
+    return;
+  }
+  printWindow.document.open();
+  printWindow.document.write(buildPrintableHtml(slidesToPrint, docTitle));
+  printWindow.document.close();
+  const triggerPrint = () => {
+    printWindow.focus();
+    printWindow.print();
+    window.setTimeout(() => printWindow.close(), 300);
+  };
+  if(printWindow.document.readyState === 'complete') triggerPrint();
+  else printWindow.addEventListener('load', triggerPrint, { once: true });
+}
+
+function exportCurrentPagePdf(){
   const slide = getCurrentSlide();
   if(!slide) return;
   clearPrintTarget();
   document.body.classList.add('print-current');
   slide.classList.add('print-target');
   preparePrintLayout();
-  showPrintSettingsHint();
-  window.print();
+  showPdfExportHint();
+  openPrintWindow([slide], `${document.title}（当前页）`);
+  finalizePrintCleanup();
 }
 
-function printAllPages(){
+function exportAllPagesPdf(){
   clearPrintTarget();
   preparePrintLayout();
-  showPrintSettingsHint();
-  window.print();
+  const slidesToPrint = targetSlidesForPrint();
+  if(slidesToPrint.length > 80){
+    const proceed = window.confirm(`当前共有 ${slidesToPrint.length} 页，全部导出 PDF 可能让浏览器卡死。是否继续？`);
+    if(!proceed){
+      finalizePrintCleanup();
+      return;
+    }
+  }
+  showPdfExportHint();
+  openPrintWindow(slidesToPrint, `${document.title}（全部）`);
+  finalizePrintCleanup();
 }
 
 window.addEventListener('beforeprint', preparePrintLayout);
@@ -4558,8 +4625,8 @@ document.getElementById('exportPptBtn')?.addEventListener('click', exportSlidesT
 
 document.getElementById('prevBtn').addEventListener('click',()=>goToSlide(currentIndex()-1));
 document.getElementById('nextBtn').addEventListener('click',()=>goToSlide(currentIndex()+1));
-document.getElementById('printCurrentBtn').addEventListener('click', printCurrentPage);
-document.getElementById('printAllBtn').addEventListener('click', printAllPages);
+document.getElementById('printCurrentBtn').addEventListener('click', exportCurrentPagePdf);
+document.getElementById('printAllBtn').addEventListener('click', exportAllPagesPdf);
 
 document.getElementById('fsBtn').addEventListener('click',()=>{
   if(!document.fullscreenElement) document.documentElement.requestFullscreen?.();
@@ -4572,14 +4639,14 @@ window.addEventListener('resize',()=>{ refreshSlides(); updateUI(); scheduleReru
 document.addEventListener('keydown',(e)=>{
   if((e.ctrlKey || e.metaKey) && e.key.toLowerCase()==='p'){
     e.preventDefault();
-    if(e.shiftKey) printAllPages();
-    else printCurrentPage();
+    if(e.shiftKey) exportAllPagesPdf();
+    else exportCurrentPagePdf();
     return;
   }
   if(e.key==='p' || e.key==='P'){
     e.preventDefault();
-    if(e.shiftKey) printAllPages();
-    else printCurrentPage();
+    if(e.shiftKey) exportAllPagesPdf();
+    else exportCurrentPagePdf();
     return;
   }
   if(['ArrowDown','PageDown'].includes(e.key)){e.preventDefault();goToSlide(currentIndex()+1);}
