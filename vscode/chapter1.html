@@ -1337,6 +1337,7 @@ body[data-theme="showcase"] .toc a:hover{
 
 #themeToggleBtn{min-width:98px}
 #densityToggleBtn{min-width:98px}
+#layoutToggleBtn{min-width:98px}
 .density-panel{
   position:fixed;top:76px;right:334px;z-index:36;width:300px;
   padding:16px 16px 14px;border-radius:22px;
@@ -1421,6 +1422,48 @@ body[data-density="print"] .math-display{margin:0;padding:0;font-size:.93em;line
 body[data-density="print"] .footer-note{font-size:14px}
 body[data-density="print"] .quote-box,body[data-density="print"] .meta-card{font-size:19px;line-height:1.4}
 
+
+.layout-grid{display:grid;grid-template-columns:1fr;gap:10px}
+.layout-chip{
+  display:flex;align-items:center;gap:10px;width:100%;text-align:left;
+  padding:10px 12px;border-radius:16px;border:1px solid rgba(0,0,0,.06);
+  background:rgba(255,255,255,.76);cursor:pointer;transition:.2s ease;color:var(--text)
+}
+.layout-chip:hover{transform:translateY(-1px);box-shadow:0 10px 22px rgba(36,76,120,.10)}
+.layout-chip.active{border-color:var(--acc);box-shadow:0 0 0 2px color-mix(in srgb, var(--acc) 16%, transparent), 0 10px 22px rgba(36,76,120,.10)}
+.layout-chip strong{display:block;font-size:13px;line-height:1.2}
+.layout-chip span{display:block;font-size:11px;line-height:1.45;color:var(--sub);margin-top:2px}
+.layout-bars{
+  flex:0 0 auto;width:32px;height:32px;border-radius:12px;border:1px solid rgba(255,255,255,.72);
+  background:linear-gradient(180deg,rgba(255,255,255,.92),rgba(244,248,252,.88));
+  box-shadow:inset 0 1px 0 rgba(255,255,255,.55);position:relative
+}
+.layout-bars::before{
+  content:"";position:absolute;left:7px;right:7px;top:7px;bottom:7px;border-radius:7px;border:2px solid var(--acc);opacity:.75;
+}
+.layout-chip[data-layout="immersive"] .layout-bars::before{left:4px;right:4px;top:7px;bottom:7px}
+.layout-chip[data-layout="focused"] .layout-bars::before{left:10px;right:10px;top:7px;bottom:7px}
+
+body[data-layout-mode="immersive"]{
+  --slide-w:min(98vw,1440px);
+  --slide-h:min(calc(98vw * 9 / 16),810px);
+}
+body[data-layout-mode="immersive"] .slide{
+  border-radius:38px;
+  padding:30px 42px 24px 60px;
+}
+body[data-layout-mode="immersive"] .slide-title-wrap h2{letter-spacing:.015em}
+
+body[data-layout-mode="focused"]{
+  --slide-w:min(88vw,1220px);
+  --slide-h:min(calc(88vw * 9 / 16),700px);
+}
+body[data-layout-mode="focused"] .slide{
+  padding:32px 44px 24px 62px;
+}
+body[data-layout-mode="focused"] .slide-body{max-width:92%}
+body[data-layout-mode="focused"] .toc{width:236px}
+
 @media (max-width:1100px){
   .density-panel{right:14px;top:calc(76px + 320px);width:min(92vw,300px)}
 }
@@ -1428,7 +1471,7 @@ body[data-density="print"] .quote-box,body[data-density="print"] .meta-card{font
   .theme-panel{top:66px;right:14px;width:min(92vw,300px)}
   .density-panel{top:calc(66px + 320px);right:14px;width:min(92vw,300px)}
 }
-@media print{.theme-panel,.density-panel,.date-panel,#themeToggleBtn,#densityToggleBtn,#paginationToggleBtn,#dateToggleBtn{display:none!important}}
+@media print{.theme-panel,.density-panel,.date-panel,#themeToggleBtn,#densityToggleBtn,#layoutToggleBtn,#paginationToggleBtn,#dateToggleBtn{display:none!important}}
 
 
 /* ===== v32 模板标准收口：阴影可调 + 字体/间距统一 ===== */
@@ -1570,7 +1613,7 @@ body[data-shadow-mode="off"] .export-status{
   .shadow-panel{right:22px;top:236px}
 }
 @media print{
-  .theme-panel,.density-panel,.shadow-panel,.date-panel,#themeToggleBtn,#densityToggleBtn,#paginationToggleBtn,#shadowToggleBtn,#dateToggleBtn{display:none!important}
+  .theme-panel,.density-panel,.shadow-panel,.date-panel,#themeToggleBtn,#densityToggleBtn,#layoutToggleBtn,#paginationToggleBtn,#shadowToggleBtn,#dateToggleBtn{display:none!important}
 }
 
 </style>
@@ -1828,7 +1871,7 @@ body.print-measure .slide.print-fit-4{
 </head>
 <body>
 <div class="progress-wrap"><div class="progress" id="progress"></div></div>
-<header class="topbar"><div class="brand"><div class="brand-badge">📘</div><div class="brand-text"><strong>第1章 质点运动学｜五节完整课件 v31</strong><span>模板标准收口 + 严格分页 + 阴影强度/日期可调</span></div></div><div class="toolbar"><a class="btn" href="#s1">章节首页</a><a class="btn" href="#s2">第一节</a><a class="btn" href="#s46">第二节</a><a class="btn" href="#s81">第三节</a><a class="btn" href="#s147">第四节</a><a class="btn" href="#s208">第五节</a><button class="btn" id="prevBtn">上一页</button><button class="btn" id="nextBtn">下一页</button><button class="btn" id="printCurrentBtn" type="button">另存当前页PDF</button><button class="btn" id="printAllBtn" type="button">另存全部PDF</button><button class="btn" id="exportPptBtn" type="button">另存为PPT</button><button class="btn" id="themeToggleBtn" type="button">场景：日常授课</button><button class="btn" id="densityToggleBtn" type="button">版式：标准</button><button class="btn" id="paginationToggleBtn" type="button">分页：严格打印</button><button class="btn" id="shadowToggleBtn" type="button">阴影：中</button><button class="btn" id="dateToggleBtn" type="button">日期：2026年3月24日</button><button class="btn primary" id="fsBtn">全屏</button><button class="btn topbar-toggle" id="toggleTopbarBtn" type="button">隐藏快捷栏</button></div></header><button class="show-topbar-btn" id="showTopbarBtn" type="button">显示快捷栏</button>
+<header class="topbar"><div class="brand"><div class="brand-badge">📘</div><div class="brand-text"><strong>第1章 质点运动学｜五节完整课件 v31</strong><span>模板标准收口 + 严格分页 + 阴影强度/日期可调</span></div></div><div class="toolbar"><a class="btn" href="#s1">章节首页</a><a class="btn" href="#s2">第一节</a><a class="btn" href="#s46">第二节</a><a class="btn" href="#s81">第三节</a><a class="btn" href="#s147">第四节</a><a class="btn" href="#s208">第五节</a><button class="btn" id="prevBtn">上一页</button><button class="btn" id="nextBtn">下一页</button><button class="btn" id="printCurrentBtn" type="button">另存当前页PDF</button><button class="btn" id="printAllBtn" type="button">另存全部PDF</button><button class="btn" id="exportPptBtn" type="button">另存为PPT</button><button class="btn" id="themeToggleBtn" type="button">场景：日常授课</button><button class="btn" id="densityToggleBtn" type="button">版式：标准</button><button class="btn" id="layoutToggleBtn" type="button">母版：平衡</button><button class="btn" id="paginationToggleBtn" type="button">分页：严格打印</button><button class="btn" id="shadowToggleBtn" type="button">阴影：中</button><button class="btn" id="dateToggleBtn" type="button">日期：2026年3月24日</button><button class="btn primary" id="fsBtn">全屏</button><button class="btn topbar-toggle" id="toggleTopbarBtn" type="button">隐藏快捷栏</button></div></header><button class="show-topbar-btn" id="showTopbarBtn" type="button">显示快捷栏</button>
 <div class="theme-panel" id="themePanel" hidden>
   <div class="theme-panel-title">课件显示场景</div>
   <div class="theme-panel-sub">不再按颜色命名，而是按使用场景选择。切换后会立即全局生效，并会记住你上次的选择。</div>
@@ -1850,6 +1893,15 @@ body.print-measure .slide.print-fit-4{
     <button class="density-chip" data-density="standard" type="button"><i class="density-bars"></i><span><strong>标准平衡</strong><span>最通用，适合大多数页面</span></span></button>
     <button class="density-chip" data-density="compact" type="button"><i class="density-bars"></i><span><strong>紧凑推导</strong><span>更适合公式偏多、内容偏满的页面</span></span></button>
     <button class="density-chip" data-density="print" type="button"><i class="density-bars"></i><span><strong>导出优先</strong><span>更克制，适合打印前检查与 PDF 导出</span></span></button>
+  </div>
+</div>
+<div class="density-panel" id="layoutPanel" hidden>
+  <div class="theme-panel-title">母版画幅 / 布局风格</div>
+  <div class="theme-panel-sub">用于快速调整整套课件的画幅与留白，适配“常规授课、比赛展示、专注阅读”三类场景。</div>
+  <div class="layout-grid" id="layoutGrid">
+    <button class="layout-chip" data-layout="balanced" type="button"><i class="layout-bars"></i><span><strong>平衡母版</strong><span>保持当前比例与留白，适合绝大多数页面</span></span></button>
+    <button class="layout-chip" data-layout="immersive" type="button"><i class="layout-bars"></i><span><strong>展示母版</strong><span>画幅更开阔，封面与图示更有冲击力</span></span></button>
+    <button class="layout-chip" data-layout="focused" type="button"><i class="layout-bars"></i><span><strong>专注母版</strong><span>内容区域更集中，便于阅读和录屏讲解</span></span></button>
   </div>
 </div>
 <div class="density-panel" id="paginationPanel" hidden>
@@ -4476,17 +4528,20 @@ async function exportSlidesToPpt(){
 
 const THEME_STORAGE_KEY = 'htmlppt.theme.chapter1';
 const DENSITY_STORAGE_KEY = 'htmlppt.density.chapter1';
+const LAYOUT_STORAGE_KEY = 'htmlppt.layout.chapter1';
 const SHADOW_STORAGE_KEY = 'htmlppt.shadow.chapter1';
 const PAGINATION_STORAGE_KEY = 'htmlppt.pagination.chapter1';
 const DATE_STORAGE_KEY = 'htmlppt.footerDate.chapter1';
 const DEFAULT_FOOTER_DATE = '2026年3月24日';
 const themeToggleBtn = document.getElementById('themeToggleBtn');
 const densityToggleBtn = document.getElementById('densityToggleBtn');
+const layoutToggleBtn = document.getElementById('layoutToggleBtn');
 const paginationToggleBtn = document.getElementById('paginationToggleBtn');
 const shadowToggleBtn = document.getElementById('shadowToggleBtn');
 const dateToggleBtn = document.getElementById('dateToggleBtn');
 const themePanel = document.getElementById('themePanel');
 const densityPanel = document.getElementById('densityPanel');
+const layoutPanel = document.getElementById('layoutPanel');
 const paginationPanel = document.getElementById('paginationPanel');
 const shadowPanel = document.getElementById('shadowPanel');
 const datePanel = document.getElementById('datePanel');
@@ -4497,6 +4552,7 @@ const dateTodayBtn = document.getElementById('dateTodayBtn');
 const dateResetBtn = document.getElementById('dateResetBtn');
 const themeChips = [...document.querySelectorAll('.theme-chip')];
 const densityChips = [...document.querySelectorAll('.density-chip')];
+const layoutChips = [...document.querySelectorAll('.layout-chip')];
 const paginationChips = [...document.querySelectorAll('.pagination-chip')];
 const shadowChips = [...document.querySelectorAll('.shadow-chip')];
 const themeMeta = {
@@ -4513,6 +4569,11 @@ const densityMeta = {
   standard: { label: '标准' },
   compact: { label: '紧凑' },
   print: { label: '导出' }
+};
+const layoutMeta = {
+  balanced: { label: '平衡' },
+  immersive: { label: '展示' },
+  focused: { label: '专注' }
 };
 const paginationMeta = {
   strict: { label: '严格打印' },
@@ -4563,6 +4624,23 @@ function setDensityButtonLabel(densityName){
   const meta = densityMeta[densityName] || densityMeta.standard;
   densityToggleBtn.textContent = `版式：${meta.label}`;
 }
+function setLayoutButtonLabel(layoutName){
+  if(!layoutToggleBtn) return;
+  const meta = layoutMeta[layoutName] || layoutMeta.balanced;
+  layoutToggleBtn.textContent = `母版：${meta.label}`;
+}
+function applyLayoutMode(layoutName, save=true){
+  const nextLayout = layoutMeta[layoutName] ? layoutName : 'balanced';
+  if(nextLayout === 'balanced') document.body.removeAttribute('data-layout-mode');
+  else document.body.setAttribute('data-layout-mode', nextLayout);
+  layoutChips.forEach(btn => btn.classList.toggle('active', btn.dataset.layout === nextLayout));
+  setLayoutButtonLabel(nextLayout);
+  if(save){
+    try{ localStorage.setItem(LAYOUT_STORAGE_KEY, nextLayout); }catch(e){}
+  }
+  scheduleRerunLayout();
+}
+
 function setPaginationButtonLabel(modeName){
   if(!paginationToggleBtn) return;
   const meta = paginationMeta[modeName] || paginationMeta.strict;
@@ -4705,6 +4783,7 @@ function initFooterDateSystem(){
 function closeStylePanels(except){
   if(except !== 'theme') themePanel?.setAttribute('hidden','hidden');
   if(except !== 'density') densityPanel?.setAttribute('hidden','hidden');
+  if(except !== 'layout') layoutPanel?.setAttribute('hidden','hidden');
   if(except !== 'pagination') paginationPanel?.setAttribute('hidden','hidden');
   if(except !== 'shadow') shadowPanel?.setAttribute('hidden','hidden');
   if(except !== 'date') datePanel?.setAttribute('hidden','hidden');
@@ -4724,6 +4803,14 @@ function toggleDensityPanel(force){
     closeStylePanels('density');
     densityPanel.removeAttribute('hidden');
   }else densityPanel.setAttribute('hidden','hidden');
+}
+function toggleLayoutPanel(force){
+  if(!layoutPanel) return;
+  const shouldShow = typeof force === 'boolean' ? force : layoutPanel.hasAttribute('hidden');
+  if(shouldShow){
+    closeStylePanels('layout');
+    layoutPanel.removeAttribute('hidden');
+  }else layoutPanel.setAttribute('hidden','hidden');
 }
 function togglePaginationPanel(force){
   if(!paginationPanel) return;
@@ -4778,6 +4865,24 @@ function initDensitySystem(){
   }));
 }
 
+function initLayoutSystem(){
+  let saved = 'balanced';
+  try{ saved = localStorage.getItem(LAYOUT_STORAGE_KEY) || 'balanced'; }catch(e){}
+  applyLayoutMode(saved, false);
+
+  layoutToggleBtn?.addEventListener('click', (e)=>{
+    e.stopPropagation();
+    toggleLayoutPanel();
+  });
+
+  layoutChips.forEach(btn => btn.addEventListener('click', (e)=>{
+    const nextLayout = btn.dataset.layout || 'balanced';
+    applyLayoutMode(nextLayout, true);
+    toggleLayoutPanel(false);
+    e.stopPropagation();
+  }));
+}
+
 function initPaginationSystem(){
   let saved = 'strict';
   try{ saved = localStorage.getItem(PAGINATION_STORAGE_KEY) || 'strict'; }catch(e){}
@@ -4819,16 +4924,18 @@ function initShadowSystem(){
 document.addEventListener('click', (e)=>{
   const clickInTheme = !!(themePanel && !themePanel.hasAttribute('hidden') && themePanel.contains(e.target));
   const clickInDensity = !!(densityPanel && !densityPanel.hasAttribute('hidden') && densityPanel.contains(e.target));
+  const clickInLayout = !!(layoutPanel && !layoutPanel.hasAttribute('hidden') && layoutPanel.contains(e.target));
   const clickInPagination = !!(paginationPanel && !paginationPanel.hasAttribute('hidden') && paginationPanel.contains(e.target));
   const clickInShadow = !!(shadowPanel && !shadowPanel.hasAttribute('hidden') && shadowPanel.contains(e.target));
   const clickInDate = !!(datePanel && !datePanel.hasAttribute('hidden') && datePanel.contains(e.target));
   const clickThemeBtn = !!themeToggleBtn?.contains(e.target);
   const clickDensityBtn = !!densityToggleBtn?.contains(e.target);
+  const clickLayoutBtn = !!layoutToggleBtn?.contains(e.target);
   const clickPaginationBtn = !!paginationToggleBtn?.contains(e.target);
   const clickShadowBtn = !!shadowToggleBtn?.contains(e.target);
   const clickDateBtn = !!dateToggleBtn?.contains(e.target);
   const clickFooterDate = !!(e.target && e.target.classList && e.target.classList.contains('footer-date'));
-  if(clickInTheme || clickInDensity || clickInPagination || clickInShadow || clickInDate || clickThemeBtn || clickDensityBtn || clickPaginationBtn || clickShadowBtn || clickDateBtn || clickFooterDate) return;
+  if(clickInTheme || clickInDensity || clickInLayout || clickInPagination || clickInShadow || clickInDate || clickThemeBtn || clickDensityBtn || clickLayoutBtn || clickPaginationBtn || clickShadowBtn || clickDateBtn || clickFooterDate) return;
   closeStylePanels();
 });
 
@@ -4946,6 +5053,7 @@ document.addEventListener('DOMContentLoaded', async ()=>{
   });
   initThemeSystem();
   initDensitySystem();
+  initLayoutSystem();
   initPaginationSystem();
   initShadowSystem();
 initFooterDateSystem();
