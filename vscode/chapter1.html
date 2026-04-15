@@ -3929,13 +3929,24 @@ function enforceStrictPagination(){
   updateUI();
 }
 
+const PRINT_SETTINGS_HINT = '打印建议：纸张请选择“自定义 13.333in × 7.5in（16:9）”，缩放 100%，不要选择 A4，也不要选择“适应页面”。';
+
+function showPrintSettingsHint(){
+  try{
+    if(sessionStorage.getItem('print-paper-hint-shown') === '1') return;
+    sessionStorage.setItem('print-paper-hint-shown','1');
+  }catch(_err){}
+  window.alert(PRINT_SETTINGS_HINT);
+}
+
 function preparePrintLayout(){
-  if(deckInitialized) enforceStrictPagination();
   clearPrintPreparation();
-  document.body.classList.add('print-measure');
-  forceReflow(document.body);
   const targets = targetSlidesForPrint();
-  targets.forEach(fitSingleSlideForPrint);
+  targets.forEach(slide => {
+    PRINT_FIT_CLASSES.forEach(cls => slide.classList.remove(cls));
+    slide.removeAttribute('data-print-overflow');
+  });
+  forceReflow(document.body);
 }
 
 function finalizePrintCleanup(){
@@ -3950,12 +3961,14 @@ function printCurrentPage(){
   document.body.classList.add('print-current');
   slide.classList.add('print-target');
   preparePrintLayout();
+  showPrintSettingsHint();
   window.print();
 }
 
 function printAllPages(){
   clearPrintTarget();
   preparePrintLayout();
+  showPrintSettingsHint();
   window.print();
 }
 
