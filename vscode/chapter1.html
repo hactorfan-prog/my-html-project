@@ -457,9 +457,9 @@ p .math-display{display:block;margin:0}
 }
 
 /* v30: continue refining on the old base */
-:root{--h2:32px;--h3:22px;--body:22px}
-.slide-title-wrap h2{font-size:32px!important;line-height:1.18!important;letter-spacing:0!important}
-.cover .slide-title-wrap h2,.section-cover .slide-title-wrap h2{font-size:32px!important;line-height:1.18!important}
+:root{--h2:30px;--h3:22px;--body:22px}
+.slide-title-wrap h2{font-size:30px!important;line-height:1.18!important;letter-spacing:0!important;color:var(--heading-title)!important}
+.cover .slide-title-wrap h2,.section-cover .slide-title-wrap h2{font-size:31px!important;line-height:1.18!important}
 .slide p,.slide li,.slide .label{font-size:22px!important;line-height:1.50!important}
 .slide h3{font-size:22px!important;line-height:1.28!important}
 .slide.compact p,.slide.compact li,.slide.compact .label,
@@ -477,7 +477,7 @@ p .math-display{display:block;margin:0}
 .formula-line>.label{display:block!important;width:100%!important}
 .formula-line>.math-display{display:block!important;width:100%!important;text-align:center!important}
 .slide.summary-slide,.slide.board-slide{gap:8px!important}
-.slide.summary-slide .slide-title-wrap h2,.slide.board-slide .slide-title-wrap h2{font-size:32px!important}
+.slide.summary-slide .slide-title-wrap h2,.slide.board-slide .slide-title-wrap h2{font-size:30px!important}
 .slide.summary-slide .slide-body,.slide.board-slide .slide-body{gap:3px!important;padding-left:4px!important}
 .slide.summary-slide .summary-formula,.slide.board-slide .board-item,.slide.board-slide .board-subformula{gap:1px!important}
 .slide.board-slide .board-head{font-size:20px!important;line-height:1.26!important;font-weight:700;color:#234462;margin:0!important}
@@ -486,7 +486,7 @@ p .math-display{display:block;margin:0}
 .slide.board-slide .board-note.center{line-height:1.30!important}
 
 /* Page 87 and page 147: tighten and clean to a single-page board layout */
-.page-board-layout .slide-title-wrap h2{font-size:32px!important}
+.page-board-layout .slide-title-wrap h2{font-size:30px!important}
 .page-board-layout .slide-body{gap:2px!important}
 .page-board-layout .board-item{margin-top:1px!important}
 .page-board-layout .board-item.short .board-inline{gap:8px!important;max-width:100%!important}
@@ -1007,8 +1007,11 @@ mjx-container, mjx-container *,
   --merge-bg: rgba(74,144,226,.05);
   --merge-border: rgba(74,144,226,.10);
   --toc-hover-bg: rgba(74,144,226,.12);
+  --heading-title:#1f4468;
   --heading-strong:#27547b;
   --heading-sub:#2d5f8d;
+  --heading-accent:#3b6798;
+  --heading-exercise:#4165b7;
   --btn-bg: rgba(255,255,255,.90);
   --show-btn-bg: rgba(255,255,255,.92);
   --panel-float-bg: rgba(255,255,255,.94);
@@ -1035,6 +1038,10 @@ body{
 .merge-block{background:var(--merge-bg);border-color:var(--merge-border)}
 .section-block > h3,.merge-block > h3,.section-block > h3.same-level,.merge-block > h3.same-level,h4{color:var(--heading-strong)}
 .section-block > h3.subitem,.merge-block > h3.subitem,h5{color:var(--heading-sub)}
+.slide-body > h3,.slide-body > .section-block > h3.same-level{color:var(--heading-accent)}
+.slide-title-wrap h2.outline-parent.continue{color:var(--heading-sub)!important}
+.qna-large .slide-title-wrap h2,.big-text-page .slide-title-wrap h2{color:var(--heading-sub)!important}
+.exercise-slide .slide-title-wrap h2{color:var(--heading-exercise)!important}
 
 body[data-theme="navy"]{
   --bg:#eef4fb;--panel:rgba(255,255,255,.90);--panel2:rgba(255,255,255,.96);--text:#16304a;--sub:#607587;
@@ -2303,7 +2310,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-index">49 / 147</div>
 </div>
 <div class="slide-title-wrap"><h2>一、教学目标</h2></div>
-<div class="slide-body"><h3 id="一知识目标-2">（一）知识目标</h3><p>理解位移与路程的概念，掌握二者的区别与联系。</p><p>理解平均速度、瞬时速度、平均速率、瞬时速率的定义，明确它们的物理意义与数学表达。</p><p>理解平均加速度与瞬时加速度的定义，掌握加速度与速度变化之间的关系。</p><p>掌握速度、加速度在直角坐标系中的分量表达式，能根据运动学方程求速度和加速度。</p><p>理解一维运动中“加速”和“减速”的判据，避免把加速度的正负与加减速简单混为一谈。</p><h3 id="二能力目标-2">（二）能力目标</h3><p>培养学生从位置函数出发分析运动状态的能力。</p><p>培养学生将矢量关系转化为分量关系、再转化为可计算表达式的能力。</p><p>培养学生利用微分思想理解瞬时物理量的能力。</p><h3 id="三素养目标-2">（三）素养目标</h3><p>体会物理学中“由平均到瞬时、由近似到精确”的研究思路。</p><p>理解微积分并不是脱离物理而存在的抽象数学工具，而是描述连续运动的重要语言。</p><p>形成对位移、速度、加速度等基本概念的规范表达习惯。</p></div>
+<div class="slide-body"><h3 id="一知识目标-2">（一）知识目标（会说）</h3><p>能准确区分位移与路程、平均速度与平均速率、瞬时速度与瞬时速率，并能口头说明各自物理意义。</p><p>能说明“加速度描述的是速度变化（大小和/或方向变化）”的含义，并举例反驳“有速度就一定有加速度”。</p><h3 id="二能力目标-2">（二）技能目标（会算）</h3><p>给定<span class="math-inline inline-small">\(\vec{r}(t)\)</span>或<span class="math-inline inline-small">\(x(t),y(t)\)</span>，能在3分钟内求出速度与加速度（或分量形式）。</p><p>在一维运动中，能根据速度与加速度方向关系判断“加速/减速”。</p><p>能在典型题中正确选用平均量与瞬时量公式，并说明适用条件。</p><h3 id="三素养目标-2">（三）应用目标（会用）</h3><p>能将“救护车转弯、匀速圆周、上抛运动”等情景归类并用位移—速度—加速度语言解释。</p><p>能独立完成1道综合题：由位置函数出发给出速度、加速度并作物理解释。</p></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
 <section class="slide" id="s83">
@@ -2741,7 +2748,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-index">89 / 147</div>
 </div>
 <div class="slide-title-wrap"><h2>一、教学目标</h2></div>
-<div class="slide-body"><h3 id="一知识目标-3">（一）知识目标</h3><p>理解圆周运动的基本特征，明确速度方向沿轨道切线方向。</p><p>掌握圆周运动中速度和加速度的矢量表示，理解法向加速度与切向加速度的物理意义。</p><p>掌握角位置、角位移、角速度、角加速度等角量的定义及其符号规定。</p><p>掌握线量与角量之间的关系，能够用<span class="math-inline">\(s = R\theta,\,v = R\omega,\,a_{\tau} = R\beta,\,a_{n} = \frac{v^{2}}{R} = R\omega^{2}\)</span>处理基本问题。</p><p>知道自然坐标系中平面曲线运动速度、加速度的表达，理解圆周运动是一般曲线运动的特殊情形。</p><h3 id="二能力目标-3">（二）能力目标</h3><p>培养学生把圆周运动分解为切向与法向两个方向来分析问题的能力。</p><p>培养学生在直线运动与圆周运动之间建立类比的能力，学会在线量与角量之间进行转换。</p><p>培养学生根据具体物理情境选择合适描述量的能力，例如在转动问题中优先考虑角量描述。</p><h3 id="三素养目标-3">（三）素养目标</h3><p>体会物理学中“分解”“等效”“模型化”的研究思想。</p><p>理解速度和加速度不只是大小问题，更重要的是方向变化问题，从而形成更加完整的矢量观念。</p><p>感受大学物理中从生活现象、工程装置到医学设备的统一分析方法。</p></div>
+<div class="slide-body"><h3 id="一知识目标-3">（一）知识目标（会说）</h3><p>能说明圆周运动中速度方向沿切线、法向加速度指向圆心的物理含义。</p><p>能口述并解释<span class="math-inline">\(a_{n}=\frac{v^{2}}{R}=R\omega^{2},\,a_{\tau}=R\beta,\,v=R\omega\)</span>等关系式的使用条件。</p><h3 id="二能力目标-3">（二）技能目标（会算）</h3><p>给定<span class="math-inline inline-small">\(R,\omega\)</span>（或转速），能在2分钟内求线速度与法向加速度。</p><p>给定<span class="math-inline inline-small">\(\theta(t)\)</span>或<span class="math-inline inline-small">\(\omega(t)\)</span>，能求<span class="math-inline inline-small">\(\beta,a_{\tau},a_{n}\)</span>及总加速度大小。</p><p>能在题目中用矢量观点说明“匀速圆周运动为何仍有加速度”。</p><h3 id="三素养目标-3">（三）应用目标（会用）</h3><p>能把风扇叶尖、离心机样品点、CT机架点等情景建模为圆周运动并完成角量到线量转换。</p><p>能在1道综合题中完成参数换算并解释结果量级与方向意义。</p></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
 <section class="slide" id="s149">
@@ -3107,9 +3114,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-index">127 / 147</div>
 </div>
 <div class="slide-title-wrap"><h2>（三）速度变换与伽利略速度相加原理</h2></div>
-<div class="slide-body"><p>将相对位移关系对时间求导，就得到速度变换关系。对于两个作平动的参考系，有：</p><p><span class="math-display">\[\vec{v}_{\text{物对地}} = \vec{v}_{\text{物对车}} + \vec{v}_{\text{车对地}}\]</span></p><p>教材中常把地面参考系中的速度称为绝对速度，把物体相对运动参考系的速度称为相对速度，把运动参考系相对地面的速度称为牵连速度。于是上式也可以口头表述为：</p><p>绝对速度等于相对速度与牵连速度的矢量和。</p><p>进一步推广，如果质点A、参考系B和参考系C都只作平动，则有更一般的伽利略速度相加原理：</p><p><span class="math-display">\[\vec{v}_{\text{A}\text{对}\text{C}} = \vec{v}_{\text{A}\text{对}\text{B}} + \vec{v}_{\text{B}\text{对}\text{C}}\]</span></p><p>这个式子特别有用。它告诉我们：只要把“谁相对谁”的下标写清楚，速度关系就像接龙一样自然连接起来。</p><p>例如，人在车上行走时，若要求“人对地”的速度，就可以写成“人对车 +
-车对地”；船在河中航行时，若要求“船对岸”的速度，就可以写成“船对水 +
-水对岸”。</p><p>这里最关键的不是记住某个固定字母，而是明白中间参考系要首尾相接。前一个量的“后半个下标”，必须和后一个量的“前半个下标”一致。</p></div>
+<div class="slide-body"><p>将相对位移关系对时间求导，就得到速度变换关系。对于两个作平动的参考系，有：</p><p><span class="math-display">\[\vec{v}_{\text{物对地}} = \vec{v}_{\text{物对车}} + \vec{v}_{\text{车对地}}\]</span></p><p>教材中常把地面参考系中的速度称为绝对速度，把物体相对运动参考系的速度称为相对速度，把运动参考系相对地面的速度称为牵连速度。于是上式也可以口头表述为：</p><p>绝对速度等于相对速度与牵连速度的矢量和。</p><p>进一步推广，如果质点A、参考系B和参考系C都只作平动，则有更一般的伽利略速度相加原理：</p><p><span class="math-display">\[\vec{v}_{\text{A}\text{对}\text{C}} = \vec{v}_{\text{A}\text{对}\text{B}} + \vec{v}_{\text{B}\text{对}\text{C}}\]</span></p><p>这个式子特别有用。它告诉我们：只要把“谁相对谁”的下标写清楚，速度关系就像接龙一样自然连接起来。</p><p>例如，人在车上行走时，若要求“人对地”的速度，可写为<span class="math-inline">\(\vec{v}_{\text{人对地}}=\vec{v}_{\text{人对车}}+\vec{v}_{\text{车对地}}\)</span>；船在河中航行时，若要求“船对岸”的速度，可写为<span class="math-inline">\(\vec{v}_{\text{船对岸}}=\vec{v}_{\text{船对水}}+\vec{v}_{\text{水对岸}}\)</span>。</p><p>这里最关键的不是记住某个固定字母，而是明白中间参考系要首尾相接。前一个量的“后半个下标”，必须和后一个量的“前半个下标”一致。</p></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
 <section class="slide" id="s215">
@@ -3221,8 +3226,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-index">138 / 147</div>
 </div>
 <div class="slide-title-wrap"><h2>问答题2</h2></div>
-<div class="slide-body"><p>请说明相对速度公式和两质点间相对速度公式有什么联系与区别。</p><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><p>二者都体现了“速度是相对的”这一思想，本质上都与速度矢量的加减有关。</p><p>不同点在于：相对速度公式通常讨论“同一物体在不同参考系中的速度变换”，例如人对地、人对车、车对地；而两质点间相对速度公式讨论的是“同一参考系内两个不同质点之间的速度差”，例如B对A的速度。</p><p>前者强调不同观察者对同一运动的描述联系，后者强调同一观察者眼中两个对象彼此之间的运动。</p><p>写成式子时，前者常表现为“对象对目标参考系 = 对象对中间参考系 +
-中间参考系对目标参考系”；后者常表现为“后者减前者”。</p></div></div>
+<div class="slide-body"><p>请说明相对速度公式和两质点间相对速度公式有什么联系与区别。</p><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><p>二者都体现了“速度是相对的”这一思想，本质上都与速度矢量的加减有关。</p><p>不同点在于：相对速度公式通常讨论“同一物体在不同参考系中的速度变换”，例如人对地、人对车、车对地；而两质点间相对速度公式讨论的是“同一参考系内两个不同质点之间的速度差”，例如B对A的速度。</p><p>前者强调不同观察者对同一运动的描述联系，后者强调同一观察者眼中两个对象彼此之间的运动。</p><p>写成式子时，前者可规范写为<span class="math-inline">\(\vec{v}_{\text{对象对目标}}=\vec{v}_{\text{对象对中间}}+\vec{v}_{\text{中间对目标}}\)</span>；后者常表现为“后者减前者”。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
 <section class="slide compact qna-large sparse-page big-text-page" id="s231">
@@ -3240,7 +3244,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-index">140 / 147</div>
 </div>
 <div class="slide-title-wrap"><h2>计算题1</h2></div>
-<div class="slide-body"><p>在湖面上，A船以<span class="math-inline inline-small">\(3.0\,\text{m/s}\)</span>的速率向东行驶。A船上的人看到B船以<span class="math-inline inline-small">\(4.0\,\text{m/s}\)</span>的速率从北面驶近A船。</p><h5 id="在湖岸上的人看来b船的速度大小和方向如何">（1）在湖岸上的人看来，B船的速度大小和方向如何？</h5><h5 id="若a船速度改为6.0ms方向仍向东则在a船上看b船的速度大小和方向又如何">（2）若A船速度改为 \(6.0\,\text{m/s}\) ，方向仍向东，则在A船上看，B船的速度大小和方向又如何？</h5><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><div class="formula-line"><span class="label">先建立速度关系。设A船、B船相对湖岸的速度分别为</span><span class="math-display">\[\vec{v}_{\text{A}\text{对岸}},\, \vec{v}_{\text{B}\text{对岸}}\]</span></div><div class="formula-line"><span class="label">A船上看到B船的速度为</span><span class="math-display">\[\vec{v}_{\text{B}\text{对}\text{A}}\]</span></div><div class="formula-line"><span class="label">根据伽利略速度相加原理，有</span><span class="math-display">\[\vec{v}_{\text{B}\text{对岸}} = \vec{v}_{\text{B}\text{对}\text{A}} + \vec{v}_{\text{A}\text{对岸}}\]</span></div></div><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><p>题意给出：A船相对岸向东<span class="math-inline inline-small">\(3.0\,\text{m/s}\)</span>；A船上看B船从北面驶近，说明B相对A的速度可分解为向南<span class="math-inline inline-small">\(4.0\,\text{m/s}\)</span>。于是岸上看B船的速度分量为：向东<span class="math-inline inline-small">\(3.0\,\text{m/s}\)</span>，向南<span class="math-inline inline-small">\(4.0\,\text{m/s}\)</span>。</p><p>所以B船速度大小为</p><p><span class="math-inline">\(v^{2} = 3.0^{2} + 4.0^{2} = 25.0\)</span>，所以<span class="math-inline inline-small">\(v = 5.0\,\text{m/s}\)</span></p><div class="formula-line"><span class="label">方向相对于正东方向向南偏转，其偏角满足</span><span class="math-display">\[\tan\theta = \frac{4.0}{3.0}\]</span></div><p>因此<span class="math-inline inline-small">\(\theta\)</span>约为53.1°。也可表述为：B船向南偏东36.9°方向行进。</p></div></div>
+<div class="slide-body"><p>在湖面上，A船相对湖岸以<span class="math-inline inline-small">\(3.0\,\text{m/s}\)</span>向东行驶。<strong>在A船参考系中</strong>，观测到B船相对A船的速度大小为<span class="math-inline inline-small">\(4.0\,\text{m/s}\)</span>，方向为<strong>正南</strong>。</p><h5 id="在湖岸上的人看来b船的速度大小和方向如何">（1）求B船相对湖岸的速度大小与方向。</h5><h5 id="若a船速度改为6.0ms方向仍向东则在a船上看b船的速度大小和方向又如何">（2）若A船相对湖岸速度改为 \(6.0\,\text{m/s}\) 向东，而B船相对湖岸速度保持（1）中结果不变，求此时B船相对A船的速度大小与方向。</h5><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><div class="formula-line"><span class="label">先建立速度关系。设A船、B船相对湖岸的速度分别为</span><span class="math-display">\[\vec{v}_{\text{A}\text{对岸}},\, \vec{v}_{\text{B}\text{对岸}}\]</span></div><div class="formula-line"><span class="label">A船上看到B船的速度为</span><span class="math-display">\[\vec{v}_{\text{B}\text{对}\text{A}}\]</span></div><div class="formula-line"><span class="label">根据伽利略速度相加原理，有</span><span class="math-display">\[\vec{v}_{\text{B}\text{对岸}} = \vec{v}_{\text{B}\text{对}\text{A}} + \vec{v}_{\text{A}\text{对岸}}\]</span></div></div><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><p>题意给出：A船相对岸向东<span class="math-inline inline-small">\(3.0\,\text{m/s}\)</span>；且在A船参考系中，B船相对A的速度方向为正南、大小为<span class="math-inline inline-small">\(4.0\,\text{m/s}\)</span>。于是岸上看B船的速度分量为：向东<span class="math-inline inline-small">\(3.0\,\text{m/s}\)</span>，向南<span class="math-inline inline-small">\(4.0\,\text{m/s}\)</span>。</p><p>所以B船速度大小为</p><p><span class="math-inline">\(v^{2} = 3.0^{2} + 4.0^{2} = 25.0\)</span>，所以<span class="math-inline inline-small">\(v = 5.0\,\text{m/s}\)</span></p><div class="formula-line"><span class="label">方向相对于正东方向向南偏转，其偏角满足</span><span class="math-display">\[\tan\theta = \frac{4.0}{3.0}\]</span></div><p>因此<span class="math-inline inline-small">\(\theta\)</span>约为53.1°。也可表述为：B船向南偏东36.9°方向行进。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section><section class="slide compact tight calc-continue" id="s233_cont2">
 <div class="slide-header">
@@ -4602,7 +4606,18 @@ function normalizeInlineTokens(root=document){
   });
 }
 
+function markExerciseSlides(root=document){
+  const exercisePattern = /(提问|问答题|计算题|作业|讨论题|思考题)/;
+  root.querySelectorAll('.slide').forEach(slide => {
+    const title = slide.querySelector('.slide-title-wrap h2');
+    if(!title) return;
+    const text = (title.textContent || '').trim();
+    if(exercisePattern.test(text)) slide.classList.add('exercise-slide');
+  });
+}
+
 document.addEventListener('DOMContentLoaded', async ()=>{
+  markExerciseSlides();
   wrapLatinRuns();
   initThemeSystem();
   initDensitySystem();
