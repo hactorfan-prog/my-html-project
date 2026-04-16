@@ -592,6 +592,17 @@ p .math-display{display:block;margin:0}
   display:flex;align-items:center;gap:8px;
   padding-bottom:2px;margin-bottom:6px;
 }
+/* v47: 系统解答过程一页仅保留一个阴影框（首个 answer-box 保留，其余扁平化） */
+.slide .slide-body > .answer-box + .answer-box,
+.slide .slide-body > .merge-block.answer-box + .answer-box,
+.slide .slide-body > .answer-box + .merge-block.answer-box,
+.slide .slide-body > .merge-block.answer-box + .merge-block.answer-box,
+.slide .answer-box .answer-box{
+  background:transparent!important;
+  border-color:transparent!important;
+  box-shadow:none!important;
+  padding:0!important;
+}
 .answer-box.continuation-question{margin-top:10px}
 .answer-box.continuation-question > h3.subitem{
   font-size:22px;
