@@ -1487,7 +1487,9 @@ body[data-layout-mode="focused"] .toc{width:236px}
   .density-panel{top:calc(66px + 320px);right:14px;width:min(92vw,300px)}
 }
 @media print{.theme-panel,.density-panel,.date-panel,#themeToggleBtn,#densityToggleBtn,#layoutToggleBtn,#paginationToggleBtn,#dateToggleBtn{display:none!important}}
-
+/* v48: 精简母版/风格控制，只保留 16:9 导出稳定方案 */
+#themeToggleBtn,#densityToggleBtn,#layoutToggleBtn,#paginationToggleBtn,
+#themePanel,#densityPanel,#layoutPanel,#paginationPanel{display:none!important}
 
 /* ===== v32 模板标准收口：阴影可调 + 字体/间距统一 ===== */
 :root{
@@ -1886,7 +1888,7 @@ body.print-measure .slide.print-fit-4{
 </head>
 <body>
 <div class="progress-wrap"><div class="progress" id="progress"></div></div>
-<header class="topbar"><div class="brand"><div class="brand-badge">📘</div><div class="brand-text"><strong>第1章 质点运动学｜五节完整课件 v31</strong><span>模板标准收口 + 严格分页 + 阴影强度/日期可调</span></div></div><div class="toolbar"><a class="btn" href="#s1">章节首页</a><a class="btn" href="#s2">第一节</a><a class="btn" href="#s46">第二节</a><a class="btn" href="#s81">第三节</a><a class="btn" href="#s147">第四节</a><a class="btn" href="#s208">第五节</a><button class="btn" id="prevBtn">上一页</button><button class="btn" id="nextBtn">下一页</button><button class="btn" id="printCurrentBtn" type="button">另存当前页PDF</button><button class="btn" id="printAllBtn" type="button">另存全部PDF</button><button class="btn" id="exportPptBtn" type="button">另存为PPT</button><button class="btn" id="themeToggleBtn" type="button">场景：日常授课</button><button class="btn" id="densityToggleBtn" type="button">版式：标准</button><button class="btn" id="layoutToggleBtn" type="button">母版：平衡</button><button class="btn" id="paginationToggleBtn" type="button">分页：严格打印</button><button class="btn" id="shadowToggleBtn" type="button">阴影：中</button><button class="btn" id="dateToggleBtn" type="button">日期：2026年3月24日</button><button class="btn primary" id="fsBtn">全屏</button><button class="btn topbar-toggle" id="toggleTopbarBtn" type="button">隐藏快捷栏</button></div></header><button class="show-topbar-btn" id="showTopbarBtn" type="button">显示快捷栏</button>
+<header class="topbar"><div class="brand"><div class="brand-badge">📘</div><div class="brand-text"><strong>第1章 质点运动学｜五节完整课件 v31</strong><span>模板标准收口 + 严格分页 + 阴影强度/日期可调</span></div></div><div class="toolbar"><a class="btn" href="#s1">章节首页</a><a class="btn" href="#s2">第一节</a><a class="btn" href="#s46">第二节</a><a class="btn" href="#s81">第三节</a><a class="btn" href="#s147">第四节</a><a class="btn" href="#s208">第五节</a><button class="btn" id="prevBtn">上一页</button><button class="btn" id="nextBtn">下一页</button><button class="btn" id="printCurrentBtn" type="button">另存当前页PDF</button><button class="btn" id="printAllBtn" type="button">另存全部PDF</button><button class="btn" id="exportPptBtn" type="button">另存为PPT</button><button class="btn" id="shadowToggleBtn" type="button">阴影：中</button><button class="btn" id="dateToggleBtn" type="button">日期：2026年3月24日</button><button class="btn primary" id="fsBtn">全屏</button><button class="btn topbar-toggle" id="toggleTopbarBtn" type="button">隐藏快捷栏</button></div></header><button class="show-topbar-btn" id="showTopbarBtn" type="button">显示快捷栏</button>
 <div class="theme-panel" id="themePanel" hidden>
   <div class="theme-panel-title">课件显示场景</div>
   <div class="theme-panel-sub">不再按颜色命名，而是按使用场景选择。切换后会立即全局生效，并会记住你上次的选择。</div>
@@ -4915,75 +4917,19 @@ function toggleShadowPanel(force){
 }
 
 function initThemeSystem(){
-  let saved = 'default';
-  try{ saved = localStorage.getItem(THEME_STORAGE_KEY) || 'default'; }catch(e){}
-  applyTheme(saved, false);
-
-  themeToggleBtn?.addEventListener('click', (e)=>{
-    e.stopPropagation();
-    toggleThemePanel();
-  });
-
-  themeChips.forEach(btn => btn.addEventListener('click', (e)=>{
-    const nextTheme = btn.dataset.theme || 'default';
-    applyTheme(nextTheme, true);
-    toggleThemePanel(false);
-    e.stopPropagation();
-  }));
+  applyTheme('default', false);
 }
 
 function initDensitySystem(){
-  let saved = 'standard';
-  try{ saved = localStorage.getItem(DENSITY_STORAGE_KEY) || 'standard'; }catch(e){}
-  applyDensity(saved, false);
-
-  densityToggleBtn?.addEventListener('click', (e)=>{
-    e.stopPropagation();
-    toggleDensityPanel();
-  });
-
-  densityChips.forEach(btn => btn.addEventListener('click', (e)=>{
-    const nextDensity = btn.dataset.density || 'standard';
-    applyDensity(nextDensity, true);
-    toggleDensityPanel(false);
-    e.stopPropagation();
-  }));
+  applyDensity('print', false);
 }
 
 function initLayoutSystem(){
-  let saved = 'balanced';
-  try{ saved = localStorage.getItem(LAYOUT_STORAGE_KEY) || 'balanced'; }catch(e){}
-  applyLayoutMode(saved, false);
-
-  layoutToggleBtn?.addEventListener('click', (e)=>{
-    e.stopPropagation();
-    toggleLayoutPanel();
-  });
-
-  layoutChips.forEach(btn => btn.addEventListener('click', (e)=>{
-    const nextLayout = btn.dataset.layout || 'balanced';
-    applyLayoutMode(nextLayout, true);
-    toggleLayoutPanel(false);
-    e.stopPropagation();
-  }));
+  applyLayoutMode('balanced', false);
 }
 
 function initPaginationSystem(){
-  let saved = 'strict';
-  try{ saved = localStorage.getItem(PAGINATION_STORAGE_KEY) || 'strict'; }catch(e){}
-  applyPaginationMode(saved, false);
-
-  paginationToggleBtn?.addEventListener('click', (e)=>{
-    e.stopPropagation();
-    togglePaginationPanel();
-  });
-
-  paginationChips.forEach(btn => btn.addEventListener('click', (e)=>{
-    const nextMode = btn.dataset.pagination || 'strict';
-    applyPaginationMode(nextMode, true);
-    togglePaginationPanel(false);
-    e.stopPropagation();
-  }));
+  applyPaginationMode('strict', false);
 }
 
 function initShadowSystem(){
@@ -5063,9 +5009,7 @@ document.addEventListener('keydown',(e)=>{
   if(e.key==='h'||e.key==='H'){e.preventDefault();closeStylePanels();setTopbarHidden(!document.body.classList.contains('topbar-hidden'));}
   if(e.key==='m'||e.key==='M'){
     e.preventDefault();
-    const order = ['strict','balanced','fast'];
-    const next = order[(order.indexOf(currentPaginationMode) + 1) % order.length];
-    applyPaginationMode(next, true);
+    applyPaginationMode('strict', true);
   }
   if(e.key==='r'||e.key==='R'){e.preventDefault();rerunLayout();}
 });
