@@ -3870,6 +3870,7 @@ function splitSlideWithOverflowTester(slide, overflowTester){
   cacheBaseLayout(current);
   tightenToFit(current);
   forceReflow(current);
+  if(current.classList.contains('no-auto-split')) return;
 
   while(overflowTester(current)){
     if(seq > continuationLimit){
