@@ -238,6 +238,10 @@ p .math-display{display:block;margin:0}
   font-size: 20px !important;
   margin-top: 2px;
 }
+.slide.no-auto-split{
+  break-inside: avoid-page;
+  page-break-inside: avoid;
+}
 .merged-page .merge-block,.merged-page .section-block,.merged-page .panel,.merged-page .callout{
   padding: 10px 12px !important;
   margin: 0 !important;
@@ -1973,7 +1977,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><div class="panel stack"><h3>本节主线</h3><ul class="pretty-list"><li>（一）机械运动与力学研究的起点</li><li>（二）参考系：描述运动必须先选“参照物”</li><li>（三）坐标系：参考系的数学表示</li><li>（四）质点模型：从真实物体到理想模型</li><li>（五）物理学方法：模型化思维的重要性</li><li>（六）本节小结</li></ul></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide" id="s3">
+<section class="slide no-auto-split" id="s3">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第一节｜一、教学目标</div>
 <div class="slide-index">03 / 147</div>
@@ -2252,7 +2256,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><div class="panel stack"><h3>本节主线</h3><ul class="pretty-list"><li>（一）从点的坐标到位置矢量</li><li>（二）位置矢量的分量表示</li><li>（三）位置矢量的大小与方向</li><li>（四）例题讲解：由坐标写出位置矢量</li><li>（五）质点的运动学方程</li><li>（六）轨道方程与参数方程</li><li>（七）本节方法总结</li></ul></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide" id="s47">
+<section class="slide no-auto-split" id="s47">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第二节｜一、教学目标</div>
 <div class="slide-index">26 / 147</div>
@@ -2485,7 +2489,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><div class="panel stack"><h3>本节主线</h3><ul class="pretty-list"><li>（一）位移：描述位置变化的矢量</li><li>（二）路程：描述实际轨迹长度的标量</li><li>（三）平均速度与瞬时速度：从粗略描述到精确描述</li><li>（四）平均速率与瞬时速率：只谈快慢，不谈方向</li><li>（五）加速度：描述速度变化快慢和方向变化的物理量</li><li>（六）一维运动中“加速”和“减速”的判据</li><li>（七）本节的思想方法总结</li></ul></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide" id="s82">
+<section class="slide no-auto-split" id="s82">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第三节｜一、教学目标</div>
 <div class="slide-index">49 / 147</div>
@@ -2923,7 +2927,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><div class="panel stack"><h3>本节主线</h3><ul class="pretty-list"><li>（一）圆周运动的基本特点</li><li>（二）圆周运动的速度</li><li>（三）圆周运动的加速度</li><li>（四）自然坐标系与一般曲线运动的联系</li><li>（五）圆周运动的角量描述</li><li>（六）角量与线量的关系</li><li>（七）本节小结</li></ul></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide" id="s148">
+<section class="slide no-auto-split" id="s148">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第四节｜一、教学目标</div>
 <div class="slide-index">89 / 147</div>
@@ -3244,7 +3248,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><div class="panel stack"><h3>本节主线</h3><ul class="pretty-list"><li>（一）相对运动问题的基本思想</li><li>（二）相对位移关系</li><li>（三）速度变换与伽利略速度相加原理</li><li>（四）加速度变换关系</li><li>（五）同一参考系内两个质点之间的相对运动</li><li>（六）典型情景分析：为什么“看到的运动”会变</li><li>（七）本节小结</li></ul></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide" id="s209">
+<section class="slide no-auto-split" id="s209">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第五节｜一、教学目标</div>
 <div class="slide-index">122 / 147</div>
@@ -3859,6 +3863,7 @@ function getContinuationLimit(slide){
 }
 
 function splitSlideWithOverflowTester(slide, overflowTester){
+  if(slide.classList.contains('no-auto-split')) return;
   let current = slide;
   let seq = 1;
   const continuationLimit = getContinuationLimit(slide);
