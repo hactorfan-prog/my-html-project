@@ -1883,6 +1883,35 @@ body.print-measure .slide.print-fit-4{
   --print-math-size:15px;
   --print-gap:2px;
 }
+
+/* 计算题：计算过程中文字后公式保持同行显示 */
+.slide.calc-inline .formula-line{
+  display:flex!important;
+  grid-template-columns:none!important;
+  align-items:baseline!important;
+  gap:8px!important;
+}
+.slide.calc-inline .formula-line > .label{
+  display:inline!important;
+  width:auto!important;
+}
+.slide.calc-inline .formula-line > .math-display{
+  display:inline-block!important;
+  width:auto!important;
+  margin:0!important;
+  padding:0!important;
+  text-align:left!important;
+}
+.slide.calc-inline p > .math-display{
+  display:inline-block!important;
+  margin:0!important;
+  text-align:left!important;
+}
+.slide.calc-inline .math-display mjx-container[display="true"]{
+  display:inline-block!important;
+  margin:0!important;
+  vertical-align:middle!important;
+}
 </style>
 
 </head>
@@ -2195,7 +2224,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><p>请结合一个生活实例和一个医学实例，说明什么时候可以把物体看作质点，什么时候不能。</p><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><p>生活实例：研究一辆汽车从学校开到医院用了多长时间时，可以把汽车看作质点。因为此时只关心汽车整体的位置变化，汽车的长宽高不会影响所求结果。但如果研究汽车转弯时前轮和后轮的运动差异，或者研究汽车停车入库时车身是否会碰撞障碍物，就不能简单看作质点，因为此时汽车的尺寸和形状会直接影响分析结果。</p><p>医学实例：研究病人随检查床进入CT机架的整体移动过程时，可以把病人近似看作质点，因为此时主要关心病人整体位置如何变化。但如果研究人体不同部位在旋转检查或康复动作中的相对位移，比如肩关节、肘关节的配合运动，就不能把人体视为质点，因为这时身体各部位运动并不相同，人体的形状和结构非常重要。</p><p>综上，能否看作质点，不在于物体是什么，而在于研究目标是什么。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide compact tight" id="s38">
+<section class="slide compact tight calc-inline" id="s38">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第一节｜七、计算题（附详细解答）</div>
 <div class="slide-index">21 / 147</div>
@@ -2204,7 +2233,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><p>研究地球绕太阳公转时，常把地球看作质点。已知地球半径约为<span class="math-inline">\(6370\,\text{km}\)</span>，地球到太阳的平均距离约为<span class="math-inline">\(1.5\times10^{8}\,\text{km}\)</span>。试估算地球半径与日地距离之比，并说明为什么研究公转时可将地球视为质点。</p><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><p>已知地球半径为<span class="math-inline">\(R_{\text{地}} = 6370\,\text{km},\,L = 1.5\times10^{8}\,\text{km}\)</span>。</p><div class="formula-line"><span class="label">所求比值为：</span><span class="math-display">\[\frac{R_{\text{地}}}{L} = \frac{6370}{1.5 \times 10^{8}}\]</span></div><div class="formula-line"><span class="label">先把<span class="math-inline">\(6370\)</span>写成科学记数法：</span><span class="math-display">\[6370 = 6.37 \times 10^{3}\]</span></div><div class="formula-line"><span class="label">所以：</span><span class="math-display">\[\frac{R_{\text{地}}}{L} = \frac{6.37 \times 10^{3}}{1.5 \times 10^{8}} = \frac{6.37}{1.5} \times 10^{-5} \approx 4.25 \times 10^{-5}\]</span></div><p><strong>结论：</strong>这个比值非常小，说明地球的大小相对于其绕太阳公转的轨道尺度来说几乎可以忽略。也就是说，在研究“地球整体围绕太阳运动”这个问题时，地球不同部分因尺寸引起的差异非常小，不影响主要结论，因此可以把地球看作质点。</p></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide compact tight" id="s41">
+<section class="slide compact tight calc-inline" id="s41">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第一节｜七、计算题（附详细解答）</div>
 <div class="slide-index">22 / 147</div>
@@ -2217,7 +2246,7 @@ body.print-measure .slide.print-fit-4{
 </ol><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><div class="formula-line"><span class="label">由题意可得：</span><span class="math-display">\[x = 30\,\text{m},\,y = 40\,\text{m}\]</span></div><p>因此，转运车的位置坐标为<span class="math-inline">\((30,\,40)\)</span>。</p><div class="formula-line"><span class="label">到原点的直线距离为：</span><span class="math-display">\[r = \sqrt{x^{2} + y^{2}}\]</span></div><div class="formula-line"><span class="label">代入数据：</span><span class="math-display">\[r = \sqrt{30^{2} + 40^{2}} = \sqrt{900 + 1600} = \sqrt{2500} = 50\,\text{m}\]</span></div><p>所以，转运车到原点的直线距离为<span class="math-inline">\(50\,\text{m}\)</span>。</p><p>如果不建立坐标系，我们只能笼统地说“车在急诊楼东北方向某处”，这种说法不够定量。建立坐标系后，可以用确定的坐标值<span class="math-inline">\((30,\,40)\)</span>精确表示其位置，并且能够进一步进行距离计算、路径规划和运动分析。因此，坐标系使位置描述由定性变为定量。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide compact tight" id="s43">
+<section class="slide compact tight calc-inline" id="s43">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第一节｜七、计算题（附详细解答）</div>
 <div class="slide-index">23 / 147</div>
@@ -2405,7 +2434,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><p>在医学图像定位、机械臂末端定位或探头扫描中，为什么位置矢量的思想特别重要？</p><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><p>这些场景都不是单纯讨论“远近”，而是同时要求知道空间中的方向和距离，因此用一个带方向的矢量来描述位置比单纯的语言描述更清楚。</p><p>位置矢量可以直接与坐标系、位移、速度、加速度等概念衔接，便于后续计算和控制。</p><p>在实际设备中，定位、导航、扫描和重建都依赖精确的空间坐标与矢量关系，因此位置矢量不是抽象符号，而是很多现代医学设备背后的基础语言。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide compact tight" id="s70">
+<section class="slide compact tight calc-inline" id="s70">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第二节｜七、计算题（附详细解答）</div>
 <div class="slide-index">41 / 147</div>
@@ -2414,7 +2443,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><p>在空间直角坐标系中，某点A的坐标为<span class="math-inline">\((2\,\text{m},\,-1\,\text{m},\,2\,\text{m})\)</span>。求该点的位置矢量分量形式、大小以及与x、y、z轴正方向夹角的余弦。</p><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><p>已知点A的坐标为<span class="math-inline">\(x = 2\,\text{m},\,y = -1\,\text{m},\,z = 2\,\text{m}\)</span>。由位置矢量分量表达式可得：</p><p><span class="math-display">\[\vec{r}_{A} = (2\,\vec{i} - \vec{j} + 2\,\vec{k})\,\text{m}\]</span></p><div class="formula-line"><span class="label">其大小为：</span><span class="math-display">\[r_{A} = \sqrt{2^{2} + (-1)^{2} + 2^{2}}\,\text{m}\]</span></div><p><span class="math-display">\[r_{A} = \sqrt{4 + 1 + 4}\,\text{m} = 3\,\text{m}\]</span></p><div class="formula-line"><span class="label">于是方向余弦分别为：</span><span class="math-display">\[\cos\alpha = \frac{2}{3},\,\cos\beta = \frac{-1}{3},\,\cos\gamma = \frac{2}{3}\]</span></div><p><strong>结论：</strong>因此，该点的位置矢量为<span class="math-inline">\(2\,\vec{i} - \vec{j} + 2\,\vec{k}\)</span>（单位为m），大小为<span class="math-inline">\(3\,\text{m}\)</span>，方向余弦依次为<span class="math-inline">\(2/3,\,-1/3,\,2/3\)</span>。</p></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide compact" id="s73">
+<section class="slide compact calc-inline" id="s73">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第二节｜七、计算题（附详细解答）</div>
 <div class="slide-index">42 / 147</div>
@@ -2423,7 +2452,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><p>某质点的运动学方程为<span class="math-inline">\(x = 2t,\,y = t^{2},\,z = 0\)</span>（SI制单位）。写出其矢量形式的运动学方程，并求其轨道方程。</p><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><div class="formula-line"><span class="label">由已知可知，该质点在任意时刻t的位置矢量可写为：</span><span class="math-display">\[\vec{r}(t) = 2t\,\vec{i} + t^{2}\,\vec{j}\]</span></div><div class="formula-line"><span class="label">为了求轨道方程，需要消去时间t。由<span class="math-inline">\(x = 2t\)</span>可得：</span><span class="math-display">\[t = \frac{x}{2}\]</span></div><div class="formula-line"><span class="label">代入<span class="math-inline">\(y = t^{2}\)</span>，得到：</span><span class="math-display">\[y = {(\frac{x}{2})}^{2}\]</span></div><p><span class="math-display">\[y = \frac{x^{2}}{4},\,z = 0\]</span></p><p>因此轨道方程为<span class="math-inline">\(y = x^{2}/4\)</span>，且<span class="math-inline">\(z = 0\)</span>。这说明质点在xOy平面内沿一条开口向上的抛物线运动。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide compact" id="s75">
+<section class="slide compact calc-inline" id="s75">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第二节｜七、计算题（附详细解答）</div>
 <div class="slide-index">43 / 147</div>
@@ -2803,7 +2832,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><p>请结合医学或生活实例，说明“速度方向”和“加速度方向”可以不同。</p><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><p>以医院推床转弯为例。假设推床在转弯过程中速率近似不变，则此时病床上病人的瞬时速度方向沿轨迹切线方向，而为了使运动轨迹弯曲，必须有指向弯道内侧的加速度。于是速度方向与加速度方向不重合。</p><p>再例如，骑自行车匀速转弯时，人的运动方向总沿前进切线方向，但车始终有指向弯道内侧的加速度。由此可见，加速度方向并不一定与速度方向一致，它由速度变化量的方向决定。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="dense slide compact tight extra-tight" id="s129">
+<section class="dense slide compact tight extra-tight calc-inline" id="s129">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第三节｜七、计算题（附详细解答）</div>
 <div class="slide-index">78 / 147</div>
@@ -2815,7 +2844,7 @@ body.print-measure .slide.print-fit-4{
 <li><p>质点的加速度。</p></li>
 </ol><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><div class="formula-line"><span class="label">由运动方程可知：</span><span class="math-display">\[\vec{r}(1) = 1^{2}\vec{i} + 2 \times 1\,\vec{j} = \vec{i} + 2\,\vec{j}\]</span></div><p><span class="math-display">\[\vec{r}(3) = 3^{2}\vec{i} + 2 \times 3\,\vec{j} = 9\,\vec{i} + 6\,\vec{j}\]</span></p><div class="formula-line"><span class="label">因此位移为：</span><span class="math-display">\[\Delta\vec{r} = \vec{r}(3) - \vec{r}(1) = \left( 9\,\vec{i} + 6\,\vec{j} \right) - \left( \vec{i} + 2\,\vec{j} \right) = 8\,\vec{i} + 4\,\vec{j}\]</span></div><p>所以第一问结果为：</p><p><span class="math-display">\[\Delta\vec{r} = 8\,\vec{i} + 4\,\vec{j}\left( \text{m} \right)\]</span></p><p>第二问与第三问见下一页继续。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
-</section><section class="dense slide compact tight calc-continue" id="s129_cont">
+</section><section class="dense slide compact tight calc-continue calc-inline" id="s129_cont">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第三节｜七、计算题（附详细解答）</div>
 <div class="slide-index">79 / 147</div>
@@ -2824,7 +2853,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><p>以下按页面容量，先完成本题第二问（速度大小与方向）。</p><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><div class="formula-line"><span class="label">再求速度：</span><span class="math-display">\[\vec{v}(t) = \frac{d\vec{r}}{dt} = 2t\vec{i} + 2\,\vec{j}\]</span></div><div class="formula-line"><span class="label">当<span class="math-inline">\(t = 1\,\text{s}\)</span>时：</span><span class="math-display">\[\vec{v}(1) = 2\,\vec{i} + 2\,\vec{j}\]</span></div><div class="formula-line"><span class="label">速度大小为：</span><span class="math-display">\[v = \sqrt{2^{2} + 2^{2}} = 2\sqrt{2}\left( \text{m/s} \right)\]</span></div><p>方向与<span class="math-inline">\(x\)</span>轴正方向夹角满足：</p><p><span class="math-display">\[\tan\theta = \frac{v_{y}}{v_{x}} = \frac{2}{2} = 1\]</span></p><div class="formula-line"><span class="label">故：</span><span class="math-display">\[\theta = 45^{\circ}\]</span></div><p>第三问（加速度）见下页。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="dense slide compact tight calc-continue" id="s129_cont2">
+<section class="dense slide compact tight calc-continue calc-inline" id="s129_cont2">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第三节｜七、计算题（附详细解答）</div>
 <div class="slide-index">79 / 147</div>
@@ -2833,7 +2862,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><p>以下单独完成本题第三问（加速度），保证版面清晰。</p><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><div class="formula-line"><span class="label">由上一页速度表达式：</span><span class="math-display">\[\vec{v}(t) = 2t\vec{i} + 2\,\vec{j}\]</span></div><div class="formula-line"><span class="label">对时间求导得：</span><span class="math-display">\[\vec{a}(t) = \frac{d\vec{v}}{dt} = 2\,\vec{i}\]</span></div><div class="formula-line"><span class="label">所以第三问结果为：</span><span class="math-display">\[\vec{a} = 2\,\vec{i}\left( \text{m/s}^{2} \right)\]</span></div><p>说明质点在<span class="math-inline">\(x\)</span>方向做匀加速运动，在<span class="math-inline">\(y\)</span>方向做匀速运动。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="dense slide compact tight" id="s133">
+<section class="dense slide compact tight calc-inline" id="s133">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第三节｜七、计算题（附详细解答）</div>
 <div class="slide-index">80 / 147</div>
@@ -2846,7 +2875,7 @@ body.print-measure .slide.print-fit-4{
 <li><p>病床此过程做的是加速运动还是减速运动。</p></li>
 </ol><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><div class="formula-line"><span class="label">由题给位置函数：</span><span class="math-display">\[x = 0.40t^{2} + 0.20t\]</span></div><div class="formula-line"><span class="label">第一问：代入<span class="math-inline">\(t = 2\)</span>得</span><span class="math-display">\[x(2) = 0.40 \times 2^{2} + 0.20 \times 2 = 0.40 \times 4 + 0.40 = 2.0\left( \text{m} \right)\]</span></div><div class="formula-line"><span class="label">故病床在<span class="math-inline">\(t = 2\,\text{s}\)</span>时位于：</span><span class="math-display">\[x = 2.0\,\text{m}\]</span></div><div class="formula-line"><span class="label">第二问：速度为</span><span class="math-display">\[v = \frac{dx}{dt} = 0.80t + 0.20\]</span></div><div class="formula-line"><span class="label">代入<span class="math-inline">\(t = 2\)</span>：</span><span class="math-display">\[v(2) = 0.80 \times 2 + 0.20 = 1.80\left( \text{m/s} \right)\]</span></div></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
-</section><section class="dense slide compact tight calc-continue" id="s133_cont">
+</section><section class="dense slide compact tight calc-continue calc-inline" id="s133_cont">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第三节｜七、计算题（附详细解答）</div>
 <div class="slide-index">81 / 147</div>
@@ -2855,7 +2884,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><p>以下按页面容量，先完成本题第三问。</p><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><div class="formula-line"><span class="label">第三问：加速度为</span><span class="math-display">\[a = \frac{dv}{dt} = 0.80\left( \text{m/s}^{2} \right)\]</span></div><p>第四问（加速/减速判断）见下页。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="dense slide compact tight calc-continue" id="s133_cont2">
+<section class="dense slide compact tight calc-continue calc-inline" id="s133_cont2">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第三节｜七、计算题（附详细解答）</div>
 <div class="slide-index">81 / 147</div>
@@ -2864,7 +2893,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><p>以下单独完成第四问，便于课堂讲评。</p><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><p>第四问：因为在该过程中<span class="math-inline">\(v &gt; 0\)</span>，且<span class="math-inline">\(a &gt; 0\)</span>，速度与加速度同号，所以病床做<strong>加速运动</strong>。</p><p>也可以用“一维运动判据”理解：若<span class="math-inline">\(va &gt; 0\)</span>则速率增大，为加速运动；若<span class="math-inline">\(va &lt; 0\)</span>则速率减小，为减速运动。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide compact tight" id="s136">
+<section class="slide compact tight calc-inline" id="s136">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第三节｜七、计算题（附详细解答）</div>
 <div class="slide-index">82 / 147</div>
@@ -2876,7 +2905,7 @@ body.print-measure .slide.print-fit-4{
 <li><p>结合结果说明平均速率与平均速度大小的区别。</p></li>
 </ol><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><div class="formula-line"><span class="label">圆周长为：</span><span class="math-display">\[\Delta s = 2\pi R = 2\pi \times 50 = 100\pi\left( \text{m} \right)\]</span></div><div class="formula-line"><span class="label">所以平均速率为：</span><span class="math-display">\[\bar{v} = \frac{\Delta s}{\Delta t} = \frac{100\pi}{40} = 2.5\pi\left( \text{m/s} \right)\]</span></div><div class="formula-line"><span class="label">近似为：</span><span class="math-display">\[\bar{v} \approx 7.85\,\text{m/s}\]</span></div><div class="formula-line"><span class="label">由于跑完一圈后回到出发点，始末位置相同，因此位移为零：</span><span class="math-display">\[\Delta\vec{r} = 0\]</span></div><div class="formula-line"><span class="label">所以平均速度为：</span><span class="math-display">\[\bar{\vec{v}} = \frac{\Delta\vec{r}}{\Delta t} = 0\]</span></div><p>故平均速度大小也为：</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
-</section><section class="slide compact tight calc-continue" id="s136_cont">
+</section><section class="slide compact tight calc-continue calc-inline" id="s136_cont">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第三节｜七、计算题（附详细解答）</div>
 <div class="slide-index">83 / 147</div>
@@ -3183,7 +3212,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><p>为什么说自然坐标系比固定直角坐标系更能直接体现曲线运动速度和加速度的物理意义？</p><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><p>在固定直角坐标系中，速度和加速度往往需要分解到<span class="math-inline">\(x\)</span>、<span class="math-inline">\(y\)</span>方向，虽然计算方便，但有时不容易一眼看出“哪个分量在改变快慢，哪个分量在改变方向”。</p><p>而自然坐标系是沿轨道切线和法线建立的。这样一来：</p><p>切向分量直接对应速率变化；</p><p>法向分量直接对应方向变化。</p><p>因此，在分析曲线运动尤其是圆周运动时，自然坐标系更符合运动本身的几何特征，也更便于理解每个分量的物理意义。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide compact tight" id="s190">
+<section class="slide compact tight calc-inline" id="s190">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第四节｜七、计算题（附详细解答）</div>
 <div class="slide-index">114 / 147</div>
@@ -3192,7 +3221,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><p>某CT机架可近似看作半径为<span class="math-inline">\(R = 0.50\,\text{m}\)</span>的圆周运动系统。若机架匀速转动一周用时<span class="math-inline">\(T = 0.50\,\text{s}\)</span>，求：</p><p>机架上一点的角速度；</p><p>该点的线速度大小；</p><p>该点的法向加速度大小。</p><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><div class="formula-line"><span class="label">由周期与角速度关系得</span><span class="math-display">\[\omega = \frac{2\pi}{T} = \frac{2\pi}{0.50} = 4\pi\text{rad/s}\]</span></div><div class="formula-line"><span class="label">线速度为</span><span class="math-display">\[v = R\omega = 0.50 \times 4\pi = 2\pi\text{m/s}\]</span></div><div class="formula-line"><span class="label">即</span><span class="math-display">\[v \approx 6.28\,\text{m/s}\]</span></div><div class="formula-line"><span class="label">法向加速度为</span><span class="math-display">\[a_{n} = R\omega^{2} = 0.50 \times (4\pi)^{2} = 8\pi^{2}\text{m/s}^{2}\]</span></div><div class="formula-line"><span class="label">数值上</span><span class="math-display">\[a_{n} \approx 78.96\,\text{m/s}^{2}\]</span></div><p>因此，结果为：</p><div class="formula-line"><span class="label">角速度</span><span class="math-display">\[\omega = 4\pi\text{rad/s}\]</span></div><div class="formula-line"><span class="label">线速度</span><span class="math-display">\[v = 2\pi\text{m/s} \approx 6.28\,\text{m/s}\]</span></div><div class="formula-line"><span class="label">法向加速度</span><span class="math-display">\[a_{n} = 8\pi^{2}\text{m/s}^{2} \approx 78.96\,\text{m/s}^{2}\]</span></div><p>这道题说明，即便是匀速转动，机架上一点仍需要相当大的法向加速度来不断改变速度方向。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide compact tight" id="s193">
+<section class="slide compact tight calc-inline" id="s193">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第四节｜七、计算题（附详细解答）</div>
 <div class="slide-index">115 / 147</div>
@@ -3201,7 +3230,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><p>一飞轮初始转速为<span class="math-inline">\(n_{0} = 600\,\text{r/min}\)</span>，制动后做匀减速圆周运动，经过<span class="math-inline">\(20\,\text{s}\)</span>恰好停止。求：</p><p>飞轮的初始角速度；</p><p>角加速度；</p><p>从制动到停止总共转过多少圈。</p><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><div class="formula-line"><span class="label">先把转速换算成角速度：</span><span class="math-display">\[\omega_{0} = 2\pi \cdot \frac{600}{60} = 20\pi\text{rad/s}\]</span></div><div class="formula-line"><span class="label">停止时</span><span class="math-display">\[\omega = 0\]</span></div><div class="formula-line"><span class="label">由</span><span class="math-display">\[\omega = \omega_{0} + \beta t\]</span></div><div class="formula-line"><span class="label">得</span><span class="math-display">\[0 = 20\pi + \beta \cdot 20\]</span></div><div class="formula-line"><span class="label">所以</span><span class="math-display">\[\beta = - \pi\text{rad/s}^{2}\]</span></div><div class="formula-line"><span class="label">再由角位移公式</span><span class="math-display">\[\theta = \omega_{0}t + \frac{1}{2}\beta t^{2}\]</span></div><div class="formula-line"><span class="label">代入数据得</span><span class="math-display">\[\theta = 20\pi \times 20 + \frac{1}{2}( - \pi) \times 20^{2}\]</span></div><p><strong>续算：</strong><span class="math-display">\[\theta = 400\pi - 200\pi = 200\pi\text{rad}\]</span></p><div class="formula-line"><span class="label">转过的圈数为</span><span class="math-display">\[N = \frac{\theta}{2\pi} = \frac{200\pi}{2\pi} = 100\]</span></div><p>因此，结果为：</p><div class="formula-line"><span class="label">初始角速度</span><span class="math-display">\[\omega_{0} = 20\pi\text{rad/s}\]</span></div><div class="formula-line"><span class="label">角加速度</span><span class="math-display">\[\beta = - \pi\text{rad/s}^{2}\]</span></div><div class="formula-line"><span class="label">总转数</span><span class="math-display">\[N = 100\text{圈}\]</span></div><p>其中负号表明角加速度方向与原角速度方向相反，所以这是减速转动。</p></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide compact tight" id="s196">
+<section class="slide compact tight calc-inline" id="s196">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第四节｜七、计算题（附详细解答）</div>
 <div class="slide-index">116 / 147</div>
@@ -3454,7 +3483,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><p>相对运动问题中，为什么要特别强调下标的书写顺序？</p><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><p>因为下标本身就在表达物理意义。比如</p><p><span class="math-display">\[\vec{v}_{\text{人对地}} = \vec{v}_{\text{人对车}} + \vec{v}_{\text{车对地}}\]</span></p><p>其中“车”既是第一个速度的参考系，又是第二个速度的研究对象，因此能够首尾衔接。</p><p>如果随意改成“地对车”或“车对人”，就会使整个物理关系中断。</p><p>所以，下标不是装饰性的标记，而是相对运动推导能否成立的核心信息。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide compact tight" id="s233">
+<section class="slide compact tight calc-inline" id="s233">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第五节｜七、计算题（附详细解答）</div>
 <div class="slide-index">140 / 147</div>
@@ -3462,7 +3491,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-title-wrap"><h2>计算题1</h2></div>
 <div class="slide-body"><p>在湖面上，A船相对湖岸以<span class="math-inline">\(3.0\,\text{m/s}\)</span>向东行驶。<strong>在A船参考系中</strong>，观测到B船相对A船的速度大小为<span class="math-inline">\(4.0\,\text{m/s}\)</span>，方向为<strong>正南</strong>。</p><h5 id="在湖岸上的人看来b船的速度大小和方向如何">（1）求B船相对湖岸的速度大小与方向。</h5><h5 id="若a船速度改为6.0ms方向仍向东则在a船上看b船的速度大小和方向又如何">（2）若A船相对湖岸速度改为 \(6.0\,\text{m/s}\) 向东，而B船相对湖岸速度保持（1）中结果不变，求此时B船相对A船的速度大小与方向。</h5><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><div class="formula-line"><span class="label">先建立速度关系。设A船、B船相对湖岸的速度分别为</span><span class="math-display">\[\vec{v}_{\text{A}\text{对岸}},\, \vec{v}_{\text{B}\text{对岸}}\]</span></div><div class="formula-line"><span class="label">A船上看到B船的速度为</span><span class="math-display">\[\vec{v}_{\text{B}\text{对}\text{A}}\]</span></div><div class="formula-line"><span class="label">根据伽利略速度相加原理，有</span><span class="math-display">\[\vec{v}_{\text{B}\text{对岸}} = \vec{v}_{\text{B}\text{对}\text{A}} + \vec{v}_{\text{A}\text{对岸}}\]</span></div><p><strong>续算：</strong>题意给出：A船相对岸向东<span class="math-inline">\(3.0\,\text{m/s}\)</span>；且在A船参考系中，B船相对A的速度方向为正南、大小为<span class="math-inline">\(4.0\,\text{m/s}\)</span>。于是岸上看B船的速度分量为：向东<span class="math-inline">\(3.0\,\text{m/s}\)</span>，向南<span class="math-inline">\(4.0\,\text{m/s}\)</span>。</p><p>所以B船速度大小为</p><p><span class="math-inline">\(v^{2} = 3.0^{2} + 4.0^{2} = 25.0\)</span>，所以<span class="math-inline">\(v = 5.0\,\text{m/s}\)</span></p><div class="formula-line"><span class="label">方向相对于正东方向向南偏转，其偏角满足</span><span class="math-display">\[\tan\theta = \frac{4.0}{3.0}\]</span></div><p>因此<span class="math-inline">\(\theta\)</span>约为53.1°。也可表述为：B船向南偏东36.9°方向行进。</p></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
-</section><section class="slide compact tight calc-continue" id="s233_cont1">
+</section><section class="slide compact tight calc-continue calc-inline" id="s233_cont1">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第五节｜七、计算题（附详细解答）</div>
 <div class="slide-index">140（续1） / 147</div>
@@ -3471,7 +3500,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><div class="merge-block stack answer-box"><h3 class="subitem">答：（2）</h3><p>第（2）问中，若A船速度变为<span class="math-inline">\(6.0\,\text{m/s}\)</span>向东，而B船对岸速度仍保持上面求得的分量（东3.0、南4.0），则B对A的速度为</p><p><span class="math-display">\[\vec{v}_{\text{B}\text{对}\text{A}} = \vec{v}_{\text{B}\text{对岸}} - \vec{v}_{\text{A}\text{对岸}}\]</span></p><p>分量上表现为：东西方向<span class="math-inline">\(3.0 - 6.0 = -3.0\,\text{m/s}\)</span>，即向西<span class="math-inline">\(3.0\,\text{m/s}\)</span>；南北方向仍为向南<span class="math-inline">\(4.0\,\text{m/s}\)</span>。</p><p>故此时B对A的速度大小仍为</p><p><span class="math-inline">\(v^{2} = 3.0^{2} + 4.0^{2} = 25.0\)</span>，所以<span class="math-inline">\(v = 5.0\,\text{m/s}\)</span></p><p>方向为南偏西36.9°（也可表述为西偏南53.1°）。</p><p>这说明参考系改变后，速度的方向往往会先发生变化，而大小则可能增大、减小，也可能保持不变。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide compact tight-calc dense tight" id="s238">
+<section class="slide compact tight-calc dense tight calc-inline" id="s238">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第五节｜七、计算题（附详细解答）</div>
 <div class="slide-index">141 / 147</div>
@@ -3480,7 +3509,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body"><div class="question-panel"><p>一人能在静水中以<span class="math-inline">\(1.10\,\text{m/s}\)</span>的速度划船前进，现欲横渡一条宽为<span class="math-inline">\(1.00 \times 10^{3}\,\text{m}\)</span>、流速为<span class="math-inline">\(0.55\,\text{m/s}\)</span>的大河。</p><h5 id="若要恰好到达正对岸应如何确定划船方向到达正对岸需要多长时间">（1）若要恰好到达正对岸，应如何确定划船方向？到达正对岸需要多长时间？</h5><h5 id="若希望过河时间最短应如何划行船最终将在对岸何处登陆">（2）若希望过河时间最短，应如何划行？船最终将在对岸何处登陆？</h5></div><div class="merge-block stack answer-box"><h3 class="subitem">答：</h3><div class="formula-line"><span class="label">设船对水的速度为</span><span class="math-display">\[\vec{v}_{\text{船对水}}\]</span></div><div class="formula-line"><span class="label">水对岸的速度为</span><span class="math-display">\[\vec{v}_{\text{水对岸}}\]</span></div><div class="formula-line"><span class="label">则船对岸的速度满足</span><span class="math-display">\[\vec{v}_{\text{船对岸}} = \vec{v}_{\text{船对水}} + \vec{v}_{\text{水对岸}}\]</span></div></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide tight-calc dense compact tight reply-slide" id="s240">
+<section class="slide tight-calc dense compact tight reply-slide calc-inline" id="s240">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第五节｜七、计算题（附详细解答）</div>
 <div class="slide-index">142 / 147</div>
@@ -3489,7 +3518,7 @@ body.print-measure .slide.print-fit-4{
 <div class="slide-body answer-surface"><div class="answer-panel"><div class="formula-line"><span class="label">答：（1）设船头与垂直河岸方向夹角为<span class="math-inline">\(\alpha\)</span>，并向上游偏转，则有</span><span class="math-display">\[\sin\alpha = \frac{0.55}{1.10} = 0.5\]</span></div><div class="formula-line"><span class="label">所以</span><span class="math-display">\[\alpha = 30^{\circ}\]</span></div><div class="formula-line"><span class="label">这说明船头应朝上游偏转30°。此时船对岸的有效过河速度为</span><span class="math-display">\[v = 1.10\cos 30^{\circ} = 0.953\,\text{m/s}\]</span></div><div class="formula-line"><span class="label">故到达正对岸所需时间为</span><span class="math-display">\[t = \frac{1.00 \times 10^{3}}{0.953}\approx 1.05\times 10^{3}\,\text{s}\]</span></div></div><div class="answer-panel"><div class="formula-line"><span class="label">答：（2）若追求最短时间，则船头应直指正对岸，因此</span><span class="math-display">\[t = \frac{1.00 \times 10^{3}}{1.10}\approx 9.09\times 10^{2}\,\text{s}\]</span></div><div class="formula-line"><span class="label">在这段时间内，船会被水流向下游冲走，漂移距离为</span><span class="math-display">\[l = 0.55\times 9.09 \times 10^{2} = 5.00\times 10^{2}\,\text{m}\]</span></div><p>因此，若追求最短时间，船头应直指正对岸，但最终会在正对岸下游约500m处登陆。</p></div></div>
 <div class="footer-note"><span>范苑｜抚州医药学院</span><span>2026年3月24日</span></div>
 </section>
-<section class="slide compact tight" id="s242">
+<section class="slide compact tight calc-inline" id="s242">
 <div class="slide-header">
 <div class="eyebrow">第1章｜第五节｜七、计算题（附详细解答）</div>
 <div class="slide-index">143 / 147</div>
